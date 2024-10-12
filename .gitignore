@@ -4,6 +4,10 @@
 
 **/.npmrc
 
+.env
+
+**/.env
+
 **/.expo/
 **/dist/
 **/npm-debug.*
