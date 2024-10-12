@@ -10,14 +10,14 @@ mongoose.connect(MONGODB_URI)
 
 
 const User_Schema=new mongoose.Schema({
-    username:{type:String, required:true},
+    email:{type:String, required:true},
     password:{type:String,required:true},
     interests:{type:String}
 
 });
 
 const Transactions_Schema = new mongoose.Schema({
-    user:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
+    email:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
     vendor_name:{type:String},
     category:{type:String},
     amount:{type:Number},
@@ -26,7 +26,7 @@ const Transactions_Schema = new mongoose.Schema({
 });
 
 const User=mongoose.model('User',User_Schema);
-const Transaction=mongoose.model('User',Transactions_Schema);
+const Transaction=mongoose.model('Transaction',Transactions_Schema);
 
 
 module.exports={User,Transaction};
