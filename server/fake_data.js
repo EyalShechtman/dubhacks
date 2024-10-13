@@ -24,11 +24,11 @@ async function fakedata() {
         await Transaction.deleteMany({});
 
         const users = [
-            { email: 'ethanle425@gmail.com', password: 'epicswag',creditCard:{number:'12345',expiry:'123',cvv:'123'},income:123000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
-            { email: 'lakshey23@gmail.com', password: 'Lakshey123!',creditCard:{number:'12345',expiry:'123',cvv:'123'},income:93000 , investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
-            { email: 'tsamples445@gmail.com', password: 'omegalul@#',creditCard:{number:'12345',expiry:'123',cvv:'123'},income:40000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
-            { email: 'eyalllllll1@gmail.com', password: 'peepopeepopeepo23',creditCard:{number:'12345',expiry:'123',cvv:'123'},income:50000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
-            { email: 'bigmanmoves23@gmail.com', password: 'bowowowow3',creditCard:{number:'12345',expiry:'123',cvv:'123'},income:60000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  }
+            { email: 'ethanle425@gmail.com', password: 'epicswag',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:123000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
+            { email: 'lakshey23@gmail.com', password: 'Lakshey123!',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:93000 , investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
+            { email: 'tsamples445@gmail.com', password: 'omegalul@#',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:40000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
+            { email: 'eyalllllll1@gmail.com', password: 'peepopeepopeepo23',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:50000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
+            { email: 'bigmanmoves23@gmail.com', password: 'bowowowow3',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:60000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  }
         ];
 
         const user_list = [];
