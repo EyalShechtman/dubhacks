@@ -86,7 +86,7 @@ export default function SignupStep1() {
 
                 <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
                     {/* Button */}
-                    <Text style={styles.buttonText}>Link Credit Card</Text>
+                    <Text style={styles.buttonText}>Finish</Text>
                 </TouchableOpacity>
             </LinearGradient>
         </View>
