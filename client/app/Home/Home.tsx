@@ -63,7 +63,10 @@ export default function Home() {
                                 progress={goal.current / goal.target}
                                 color="#66B13E"
                             />
-                            <TouchableOpacity style={styles.viewButton}>
+                            <TouchableOpacity
+                                style={styles.viewButton}
+                                onPress={() => navigation.navigate('Goals/Goals')}
+                                >
                                 <Text style={styles.viewButtonText}>View</Text>
                             </TouchableOpacity>
                         </View>

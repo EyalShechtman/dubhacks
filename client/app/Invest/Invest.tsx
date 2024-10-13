@@ -88,6 +88,10 @@ export default function Invest() {
                     <Text style={styles.investmentDetail}>Investment Type: {investmentType || 'Not specified'}</Text>
                     <Text style={styles.investmentDetail}>Investment Strategy: {investmentStrategy || 'Not specified'}</Text>
                 </View>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Transfer</Text>
+                </TouchableOpacity>
+
             </View>
         </LinearGradient>
     );
@@ -140,5 +144,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginVertical: 5,
         color: '#333',
+    },
+    button: {
+        marginTop: 20,
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderRadius: 25,
+        width: '35%',
+    },
+    buttonText: {
+        color: '#66B13E',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginLeft: 0,
+        alignContent: 'center',
     },
 });
