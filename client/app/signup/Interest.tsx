@@ -21,6 +21,7 @@ const InterestPage = () => {
     const newItems = items.filter((_, i) => i !== index);
     setItems(newItems);
   };
+  
   const submitInterests=async()=>{
     if(items.length==0){
       Alert.alert('No Interests added');
