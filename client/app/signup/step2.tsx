@@ -117,7 +117,7 @@ export default function SignupStep2() {
             });
 
             if (response.ok) {
-                navigation.navigateToStep('step3');
+                navigation.navigate('signup/step3');
             } else {
                 Alert.alert('Failed to update budget.');
             }
