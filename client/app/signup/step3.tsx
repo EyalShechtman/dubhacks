@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
 
 export default function SignupStep3() {
     const navigation = useNavigation();
-    const [rectangleIndex1, setRectangleIndex1] = useState(0); // For the first set
-    const [rectangleIndex2, setRectangleIndex2] = useState(0); // For the second set
+    const [rectangleIndex1, setRectangleIndex1] = useState(0);
+    const [rectangleIndex2, setRectangleIndex2] = useState(0);
 
-    const finishSignup = () => {
+    const finishSignup = async () => {
+        const investmentType = rectangles1[rectangleIndex1].content;
+        const investmentStrategy = rectangles2[rectangleIndex2].content;
+
+        // Save the investment data to AsyncStorage
+        try {
+            await AsyncStorage.setItem('investmentData', JSON.stringify({
+                investmentType,
+                investmentStrategy
+            }));
+        } catch (error) {
+            console.error('Error saving investment data:', error);
+        }
+
+        // Emit event (if needed)
         DeviceEventEmitter.emit("event1");
+
+        // Navigate to Home
         navigation.reset({
             index: 0,
             routes: [{ name: 'Home/Home' }],
         });
     };
 
-    const navigateToStep = (step) => {
+    const navigateToStep = (step: string) => {
         navigation.navigate(`signup/${step}`);
     };
 
