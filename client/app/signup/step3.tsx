@@ -1,14 +1,52 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useAuth0 } from 'react-native-auth0';
+>>>>>>> 5d516d8014d0dcb7946437dd065b42d16305d673
 
 const { width } = Dimensions.get('window');
 
 export default function SignupStep3() {
     const navigation = useNavigation();
+<<<<<<< HEAD
+    const [rectangleIndex1, setRectangleIndex1] = useState(0);
+    const [rectangleIndex2, setRectangleIndex2] = useState(0);
+
+    const finishSignup = async () => {
+        const investmentType = rectangles1[rectangleIndex1].content;
+        const investmentStrategy = rectangles2[rectangleIndex2].content;
+
+        // Save the investment data to AsyncStorage
+        try {
+            await AsyncStorage.setItem('investmentData', JSON.stringify({
+                investmentType,
+                investmentStrategy
+            }));
+        } catch (error) {
+            console.error('Error saving investment data:', error);
+        }
+
+        // Emit event (if needed)
+        DeviceEventEmitter.emit("event1");
+
+        // Navigate to Home
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home/Home' }],
+        });
+    };
+
+    const navigateToStep = (step: string) => {
+=======
     const [rectangleIndex1, setRectangleIndex1] = useState(0); // For the first set
     const [rectangleIndex2, setRectangleIndex2] = useState(0); // For the second set
     const { authorize, user } = useAuth0();
@@ -56,6 +94,7 @@ export default function SignupStep3() {
     }
 
     const navigateToStep = (step) => {
+>>>>>>> 5d516d8014d0dcb7946437dd065b42d16305d673
         navigation.navigate(`signup/${step}`);
     };
 
