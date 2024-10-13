@@ -45,13 +45,12 @@ export default function SignupStep2() {
     ]);
     const[loading,setLoading]=useState(true);
     const[updateing,setUpdating]=useState(false);
-    const { authorize, getCredentials, getUser } = useAuth0();
+    const { authorize, user } = useAuth0();
     const buttonScale = useRef(new Animated.Value(1)).current;
     useEffect(()=>{
         async function getPredictedBudget(){
             try{
                 setLoading(true);
-                const user = await getUser();
 
                 const email = user ? user.email : "";
                 const response= await fetch('http://localhost:4000/perplexity_predict/perplexity_predict',{
@@ -102,7 +101,6 @@ export default function SignupStep2() {
         try {
             setUpdating(true);
             // Prepare data for POST request
-            const user = await getUser();
 
             const email = user ? user.email : "";
             const budget = {
