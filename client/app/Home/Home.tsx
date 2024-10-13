@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ProgressBarAndroid, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
+import { ProgressBar } from 'react-native-paper'; // Import ProgressBar from react-native-paper
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -48,12 +49,10 @@ export default function Home() {
                         <View key={index} style={styles.goalItem}>
                             <Text style={styles.goalTitle}>{goal.title}</Text>
                             <Text style={styles.goalTarget}>Target: ${goal.target}</Text>
-                            <ProgressBarAndroid
-                                styleAttr="Horizontal"
-                                indeterminate={false}
+                            <ProgressBar
+                                style={styles.progressBar}
                                 progress={goal.current / goal.target}
                                 color="#66B13E"
-                                style={styles.progressBar}
                             />
                             <TouchableOpacity style={styles.viewButton}>
                                 <Text style={styles.viewButtonText}>View</Text>
@@ -76,26 +75,6 @@ export default function Home() {
                     ))}
                 </View>
             </ScrollView>
-
-            {/* Bottom Navigation */}
-            {/* <View style={styles.bottomNav}>
-                <TouchableOpacity style={styles.navItem}>
-                    <Ionicons name="home" size={24} color="white" />
-                    <Text style={styles.navText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Goals/Goals')}>
-                    <Ionicons name="list" size={24} color="white" />
-                    <Text style={styles.navText}>Goals</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Invest/Invest')}>
-                    <Ionicons name="cash" size={24} color="white" />
-                    <Text style={styles.navText}>Invest</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile/Profile')}>
-                    <Ionicons name="person" size={24} color="white" />
-                    <Text style={styles.navText}>Profile</Text>
-                </TouchableOpacity>
-            </View> */}
         </LinearGradient>
     );
 }
@@ -212,18 +191,5 @@ const styles = StyleSheet.create({
     goalDescription: {
         fontSize: 12,
         color: '#777',
-    },
-    bottomNav: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: '#66B13E',
-        paddingVertical: 10,
-    },
-    navItem: {
-        alignItems: 'center',
-    },
-    navText: {
-        color: 'white',
-        fontSize: 12,
     },
 });
