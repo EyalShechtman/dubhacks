@@ -12,29 +12,10 @@ export default function Invest() {
         <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
             {/* Goals Section */}
             <View style={styles.goalsContainer}>
-                <Text style={styles.sectionTitle}>Your Invest</Text>
+                <Text style={styles.sectionTitle}>Your Investment Account</Text>
                 {/* Add content for goals here */}
-            </View>
 
-            {/* Bottom Navigation */}
-            {/* <View style={styles.bottomNav}>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home/Home')}>
-                    <Ionicons name="home" size={24} color="white" />
-                    <Text style={styles.navText}>Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Goals/Goals')}>
-                    <Ionicons name="list" size={24} color="white" />
-                    <Text style={styles.navText}>Goals</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem}>
-                    <Ionicons name="cash" size={24} color="white" />
-                    <Text style={styles.navText}>Invest</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile/Profile')}>
-                    <Ionicons name="person" size={24} color="white" />
-                    <Text style={styles.navText}>Profile</Text>
-                </TouchableOpacity>
-            </View> */}
+            </View>
         </LinearGradient>
     );
 }

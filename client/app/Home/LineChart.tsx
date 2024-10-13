@@ -7,7 +7,7 @@ const LineChartComponent = () => {
 
     // Dummy data showing growth
     const data = {
-        labels: ['10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM'],
+        // labels: ['10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM'],
         datasets: [
             {
                 data: [100, 150, 200, 250, 300, 350],
@@ -17,8 +17,8 @@ const LineChartComponent = () => {
     };
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#66B13E', padding: 20 }}>
-            <Text style={{ color: '#FFFFFF', fontSize: 18, marginBottom: 10 }}>
+        <View style={{ flex: 1, backgroundColor: '#66B13E', margin: 10 }}>
+            <Text style={{ color: '#FFFFFF', fontSize: 18, marginBottom: -30 }}>
                 Stock Growth Chart
             </Text>
             <LineChart
