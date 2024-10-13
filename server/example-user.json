@@ -1,0 +1,47 @@
+{
+    "email": "example@example.com",
+    "password": "password123",
+    "creditCard": {
+        "number": "1234-5678-9012-3456",
+        "expiryDate": "12/25",
+        "cvv": "123"
+    },
+    "budget": {
+        "food": {
+            "max": 500,
+            "spent": 200
+        },
+        "travel": {
+            "max": 300,
+            "spent": 100
+        },
+        "health": {
+            "max": 200,
+            "spent": 50
+        },
+        "other": {
+            "max": 400,
+            "spent": 300
+        }
+    },
+    "transactions": [
+        {
+            "vendor_name": "Amazon",
+            "category": "Other",
+            "amount": 150.75,
+            "date": "2024-10-01",
+            "location": "Online"
+        },
+        {
+            "vendor_name": "Starbucks",
+            "category": "Food",
+            "amount": 12.5,
+            "date": "2024-10-02",
+            "location": "Seattle, WA"
+        }
+    ],
+    "investmentPortfolio": {
+        "investmentComfort": "moderate",
+        "investmentType": "roundup"
+    }
+}

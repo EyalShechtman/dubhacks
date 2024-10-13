@@ -2,29 +2,29 @@ const mongoose = require('mongoose');
 
 const User_Schema = new mongoose.Schema({
     email: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: String },
     creditCard: {
         number: { type: String, required: true },
         expiryDate: { type: String, required: true },
         cvv: { type: String, required: true }
     },
-    income:{type:Number,required:true},
+    income: { type: Number },
     budget: {
         food: {
-            max: { type: Number,default:0},
-            spent: { type: Number}
+            max: { type: Number, default: 0 },
+            spent: { type: Number }
         },
         travel: {
-            max: { type: Number,default:0},
-            spent: { type: Number}
+            max: { type: Number, default: 0 },
+            spent: { type: Number }
         },
         health: {
-            max: { type: Number,default:0},
-            spent: { type: Number}
+            max: { type: Number, default: 0 },
+            spent: { type: Number }
         },
         other: {
-            max: { type: Number,default:0},
-            spent: { type: Number}
+            max: { type: Number, default: 0 },
+            spent: { type: Number }
         }
     },
     investmentPortfolio: {
