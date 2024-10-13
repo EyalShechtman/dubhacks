@@ -8,6 +8,7 @@ import Invest from "./Invest/Invest";
 import Profile from "./Profile/Profile";
 import SignupStep3 from "./signup/step3";
 import { Ionicons } from '@expo/vector-icons';
+import { useAuth0, Auth0Provider } from 'react-native-auth0';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,7 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <>
+    <Auth0Provider domain={"dev-w5mc4qlyvvazlxk2.us.auth0.com"} clientId={"lBSMealba0tfz3VOyuwVBsR6mZKfrGcX"}>
       {isSignedUp ? (
         // Once the user has signed up, show the bottom tab navigation (Main App)
         <Tab.Navigator
@@ -95,6 +96,6 @@ export default function RootLayout() {
           />
         </Stack>
       )}
-    </>
+    </Auth0Provider>
   );
 }

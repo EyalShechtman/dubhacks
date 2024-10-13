@@ -32,7 +32,7 @@ export default function Index() {
   const [accessToken, setAccessToken] = useState(null);
 
   return (
-    <Auth0Provider domain={"dev-w5mc4qlyvvazlxk2.us.auth0.com"} clientId={"lBSMealba0tfz3VOyuwVBsR6mZKfrGcX"}>
+    <>
       <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
         <View style={styles.textContainer}>
           <Text style={styles.welcomeText}>RomeRich</Text>
@@ -41,7 +41,7 @@ export default function Index() {
           <LoginButton setAccessToken={setAccessToken} />
         </View>
       </LinearGradient>
-    </Auth0Provider>
+    </>
   );
 }
 
