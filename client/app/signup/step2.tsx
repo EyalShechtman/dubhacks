@@ -238,17 +238,21 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 1},
         shadowOpacity: 0.1,
         shadowRadius: 1,
+        paddingHorizontal: 10, // Add padding to extend background
     },
     sliderTrack: {
         height: 4,
         backgroundColor: '#CCCCCC',
         borderRadius: 2,
+        position: 'relative', // Add this to position the track
+        width: '100%', // Ensure the track fills the container width
     },
     sliderFill: {
         height: 4,
         backgroundColor: '#66B03E',
         borderRadius: 2,
         position: 'absolute',
+        left: 0, // Align to the left of the track
     },
     sliderThumb: {
         width: 20,
