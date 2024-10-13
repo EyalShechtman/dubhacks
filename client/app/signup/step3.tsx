@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -12,6 +12,7 @@ export default function SignupStep3() {
     const [rectangleIndex2, setRectangleIndex2] = useState(0); // For the second set
 
     const finishSignup = () => {
+        DeviceEventEmitter.emit("event1");
         navigation.reset({
             index: 0,
             routes: [{ name: 'Home/Home' }],
@@ -39,15 +40,15 @@ export default function SignupStep3() {
     };
 
     const rectangles1 = [
-        { style: styles.rectangle1, content: 'Round-Up'},
-        { style: styles.rectangle2, content: 'Excess budget'},
-        { style: styles.rectangle3, content: 'Both (Rec)'},
+        { style: styles.rectangle1, content: 'Round-Up' },
+        { style: styles.rectangle2, content: 'Excess budget' },
+        { style: styles.rectangle3, content: 'Both (Rec)' },
     ];
 
     const rectangles2 = [
-        { style: styles.rectangle4, content: 'Conservative'},
-        { style: styles.rectangle5, content: 'Moderate'},
-        { style: styles.rectangle6, content: 'Aggresive'},
+        { style: styles.rectangle4, content: 'Conservative' },
+        { style: styles.rectangle5, content: 'Moderate' },
+        { style: styles.rectangle6, content: 'Aggresive' },
     ];
 
     const summaries = [
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '90%',
         marginVertical: 10,
-    },    
+    },
     rectangleText: {
         color: 'black',
         fontSize: 18,

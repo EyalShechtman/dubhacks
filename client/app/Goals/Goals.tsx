@@ -16,7 +16,7 @@ export default function Goals() {
                 {/* Add content for goals here */}
             </View>
 
-            {/* Bottom Navigation */}
+            {/* Bottom Navigation
             <View style={styles.bottomNav}>
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home/Home')}>
                     <Ionicons name="home" size={24} color="white" />
@@ -34,7 +34,7 @@ export default function Goals() {
                     <Ionicons name="person" size={24} color="white" />
                     <Text style={styles.navText}>Profile</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </LinearGradient>
     );
 }

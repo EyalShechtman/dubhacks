@@ -17,7 +17,7 @@ export default function Invest() {
             </View>
 
             {/* Bottom Navigation */}
-            <View style={styles.bottomNav}>
+            {/* <View style={styles.bottomNav}>
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home/Home')}>
                     <Ionicons name="home" size={24} color="white" />
                     <Text style={styles.navText}>Home</Text>
@@ -34,7 +34,7 @@ export default function Invest() {
                     <Ionicons name="person" size={24} color="white" />
                     <Text style={styles.navText}>Profile</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </LinearGradient>
     );
 }
