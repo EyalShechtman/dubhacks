@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-// import Slider from '@react-native-community/slider';
+import Slider from '@react-native-community/slider';
 
 export default function SignupStep2() {
     const navigation = useNavigation();
@@ -48,7 +48,7 @@ export default function SignupStep2() {
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How is your budget?</Text>
                 </View>
-                {/* <ScrollView style={styles.scrollView}>
+                <ScrollView style={styles.scrollView}>
                     {budgetValues.map((item, index) => (
                         <View key={index} style={styles.budgetItem}>
                             <View style={styles.labelContainer}>
@@ -72,7 +72,7 @@ export default function SignupStep2() {
                             />
                         </View>
                     ))}
-                </ScrollView> */}
+                </ScrollView>
                 <TouchableOpacity style={styles.continueButton} onPress={() => navigateToStep('step3')}>
                     <Text style={styles.continueButtonText}>Continue</Text>
                 </TouchableOpacity>
