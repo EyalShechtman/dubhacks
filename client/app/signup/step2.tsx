@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, PanResponder } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, PanResponder, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -45,8 +45,18 @@ export default function SignupStep2() {
         { category: 'Entertainment', amount: 20000 }
     ]);
 
+    const buttonScale = useRef(new Animated.Value(1)).current;
+
+    const animateButton = () => {
+        Animated.sequence([
+            Animated.timing(buttonScale, { toValue: 0.95, duration: 100, useNativeDriver: true }),
+            Animated.timing(buttonScale, {toValue: 1, duration: 100, useNativeDriver: true })
+        ]).start();
+    };
+
     const navigateToStep = (step) => {
-        navigation.navigate(`signup/${step}`);
+        animateButton();
+        setTimeout(() => navigation.navigate(`signup/${step}`), 200);
     };
 
     const updateBudget = (index: number, newAmount: number) => {
@@ -58,13 +68,14 @@ export default function SignupStep2() {
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
-                <Ionicons
-                    name="arrow-back"
-                    size={24}
-                    color="white"
+                <TouchableOpacity
                     onPress={() => navigation.goBack()}
-                    style={styles.backArrow}
-                />
+                    style={styles.backButton}
+                    accessibilityLabel="Go Back"
+                >
+                    <Ionicons name="arrow-back" size={24} color="white" />
+                </TouchableOpacity>
+
                 <View style={styles.dotsContainer}>
                     <TouchableOpacity onPress={() => navigateToStep('step1')}>
                         <View style={styles.dotInactive} />
@@ -76,10 +87,12 @@ export default function SignupStep2() {
                         <View style={styles.dotInactive} />
                     </TouchableOpacity>
                 </View>
+
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How is your budget?</Text>
                 </View>
-                <ScrollView style={styles.scrollView}>
+
+                <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
                     {budgetValues.map((item, index) => (
                         <View key={index} style={styles.budgetItem}>
                             <View style={styles.labelContainer}>
@@ -89,6 +102,7 @@ export default function SignupStep2() {
                                     value={item.amount.toString()}
                                     onChangeText={(text) => updateBudget(index, parseInt(text) || 0)}
                                     keyboardType="numeric"
+                                    accessibilityLabel={`${item.category} budget amount`}
                                 />
                             </View>
                             <CustomSlider
@@ -100,9 +114,16 @@ export default function SignupStep2() {
                         </View>
                     ))}
                 </ScrollView>
-                <TouchableOpacity style={styles.continueButton} onPress={() => navigateToStep('step3')}>
-                    <Text style={styles.continueButtonText}>Continue</Text>
-                </TouchableOpacity>
+
+                <Animated.View style={[styles.continueButtonContainer, { transform: [{ scale: buttonScale }] }]}>
+                    <TouchableOpacity 
+                        style={styles.continueButton} 
+                        onPress={() => navigateToStep('step3')}
+                        accessibilityLabel="Continue to next step"
+                    >
+                        <Text style={styles.continueButtonText}>Continue</Text>
+                    </TouchableOpacity>
+                </Animated.View>
             </LinearGradient>
         </View>
     );
@@ -118,10 +139,11 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
     },
-    backArrow: {
+    backButton: {
         position: 'absolute',
         top: 50,
         left: 20,
+        padding: 10,
     },
     dotsContainer: {
         position: 'absolute',
@@ -148,20 +170,23 @@ const styles = StyleSheet.create({
         marginTop: 100,
         alignSelf: 'flex-start',
         marginLeft: 20,
+        marginBottom: 20,
     },
     welcomeText: {
         color: '#FFFFFF',
-        fontSize: 28,
+        fontSize: 32,
         fontFamily: 'Roboto',
         fontWeight: 'bold',
     },
     scrollView: {
         width: '100%',
-        marginTop: 20,
+    },
+    scrollViewContent: {
+        paddingHorizontal: 20,
+        paddingBottom: 100,
     },
     budgetItem: {
-        marginBottom: 20,
-        paddingHorizontal: 20,
+        marginBottom: 30,
     },
     labelContainer: {
         flexDirection: 'row',
@@ -170,57 +195,86 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     categoryText: {
-        fontSize: 18,
+        fontSize: 20,
         fontFamily: 'Roboto',
         color: '#000000',
+        fontWeight: '500',
     },
     amountInput: {
-        width: 80,
-        height: 40,
+        width: 100,
+        height: 44,
         borderColor: '#66B03E',
         borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 10,
+        borderRadius: 8,
+        paddingHorizontal: 12,
         fontFamily: 'Roboto',
         color: '#000000',
         textAlign: 'right',
+        backgroundColor: '#FFFFFF',
+        fontSize: 18,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+    },
+    continueButtonContainer: {
+        position: 'absolute',
+        bottom: 30,
+        width: '100%',
+        alignItems: 'center',
     },
     continueButton: {
         backgroundColor: '#C0DFB0',
-        paddingVertical: 15,
-        paddingHorizontal: 30,
+        paddingVertical: 16,
+        paddingHorizontal: 32,
         borderRadius: 25,
-        position: 'absolute',
-        bottom: 30,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
     },
     continueButtonText: {
         color: '#000000',
         fontSize: 18,
         fontFamily: 'Roboto',
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     sliderContainer: {
         height: 40,
         justifyContent: 'center',
+        borderRadius: 10,
+        overflow: 'hidden',
+        backgroundColor: '#EAEAEA',
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
     },
     sliderTrack: {
-        height: 4,
-        backgroundColor: '#000000',
-        borderRadius: 2,
+        height: 6,
+        backgroundColor: '#CCCCCC',
+        borderRadius: 3,
     },
     sliderFill: {
-        height: 4,
+        height: 6,
         backgroundColor: '#66B03E',
-        borderRadius: 2,
+        borderRadius: 3,
         position: 'absolute',
     },
     sliderThumb: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
+        width: 28,
+        height: 28,
+        borderRadius: 14,
         backgroundColor: '#66B03E',
         position: 'absolute',
-        top: -8,
-        marginLeft: -10,
+        top: -11,
+        marginLeft: -14,
+        borderWidth: 2,
+        borderColor: '#FFFFFF',
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
     },
 });
