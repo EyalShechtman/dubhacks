@@ -8,44 +8,51 @@ const { width } = Dimensions.get('window');
 
 export default function SignupStep3() {
     const navigation = useNavigation();
-    const [rectangleIndex, setRectangleIndex] = useState(0);
+    const [rectangleIndex1, setRectangleIndex1] = useState(0); // For the first set
+    const [rectangleIndex2, setRectangleIndex2] = useState(0); // For the second set
 
     const finishSignup = () => {
         navigation.reset({
             index: 0,
-            routes: [{ name: 'Home/Home' }], // replace 'home' with your actual home page route
+            routes: [{ name: 'Home/Home' }],
         });
     };
-
 
     const navigateToStep = (step) => {
         navigation.navigate(`signup/${step}`);
     };
 
-    const nextRectangle = () => {
-        setRectangleIndex((prevIndex) => (prevIndex + 1) % 3);
+    const nextRectangle1 = () => {
+        setRectangleIndex1((prevIndex) => (prevIndex + 1) % 3);
     };
 
-    const prevRectangle = () => {
-        setRectangleIndex((prevIndex) => (prevIndex - 1 + 3) % 3);
+    const prevRectangle1 = () => {
+        setRectangleIndex1((prevIndex) => (prevIndex - 1 + 3) % 3);
     };
 
-    const rectangles = [
-        {
-            style: styles.rectangle1,
-            content: 'Both (Recommended)',
-            subtext: 'A round-up investing account rounds up purchases to the nearest dollar and invests the spare change, helping you grow wealth passively.',
-        },
-        {
-            style: styles.rectangle2,
-            content: 'Round Up',
-            subtext: 'This is text for RoundUP',
-        },
-        {
-            style: styles.rectangle3,
-            content: 'Monthly left overs',
-            subtext: 'This is text for monthly overs',
-        },
+    const nextRectangle2 = () => {
+        setRectangleIndex2((prevIndex) => (prevIndex + 1) % 3);
+    };
+
+    const prevRectangle2 = () => {
+        setRectangleIndex2((prevIndex) => (prevIndex - 1 + 3) % 3);
+    };
+
+    const rectangles1 = [
+        { style: styles.rectangle1, content: 'Round-Up'},
+        { style: styles.rectangle2, content: 'Excess budget'},
+        { style: styles.rectangle3, content: 'Both (Rec)'},
+    ];
+
+    const rectangles2 = [
+        { style: styles.rectangle4, content: 'Conservative'},
+        { style: styles.rectangle5, content: 'Moderate'},
+        { style: styles.rectangle6, content: 'Aggresive'},
+    ];
+
+    const summaries = [
+        ['Summary for Set 1, Option 1', 'Summary for Set 1, Option 2', 'Summary for Set 1, Option 3'],
+        ['Summary for Set 2, Option 1', 'Summary for Set 2, Option 2', 'Summary for Set 2, Option 3'],
     ];
 
     return (
@@ -72,27 +79,43 @@ export default function SignupStep3() {
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How would you like to invest?</Text>
                 </View>
-                <TouchableOpacity style={styles.arrowLeft} onPress={prevRectangle}>
-                    <Ionicons name="arrow-back" size={30} color="white" />
-                </TouchableOpacity>
 
-                {/* Rectangle */}
-                <View style={rectangles[rectangleIndex].style}>
-                    <Text style={styles.rectangleText}>
-                        {rectangles[rectangleIndex].content}
-                    </Text>
-                    <Text style={styles.rectangleSubtext}>
-                        {rectangles[rectangleIndex].subtext}
-                    </Text>
+                {/* Set 1 */}
+                <View style={styles.rectangleContainer}>
+                    <TouchableOpacity style={styles.arrowLeft} onPress={prevRectangle1}>
+                        <Ionicons name="arrow-back" size={30} color="white" />
+                    </TouchableOpacity>
+                    <View style={rectangles1[rectangleIndex1].style}>
+                        <Text style={styles.rectangleText}>{rectangles1[rectangleIndex1].content}</Text>
+                        {/* <Text style={styles.rectangleSubtext}>{rectangles1[rectangleIndex1].subtext}</Text> */}
+                    </View>
+                    <TouchableOpacity style={styles.arrowRight} onPress={nextRectangle1}>
+                        <Ionicons name="arrow-forward" size={30} color="white" />
+                    </TouchableOpacity>
                 </View>
 
-                {/* Right Arrow */}
-                <TouchableOpacity style={styles.arrowRight} onPress={nextRectangle}>
-                    <Ionicons name="arrow-forward" size={30} color="white" />
-                </TouchableOpacity>
+                {/* Set 2 */}
+                <View style={styles.rectangleContainer}>
+                    <TouchableOpacity style={styles.arrowLeft} onPress={prevRectangle2}>
+                        <Ionicons name="arrow-back" size={30} color="white" />
+                    </TouchableOpacity>
+                    <View style={rectangles2[rectangleIndex2].style}>
+                        <Text style={styles.rectangleText}>{rectangles2[rectangleIndex2].content}</Text>
+                        {/* <Text style={styles.rectangleSubtext}>{rectangles2[rectangleIndex2].subtext}</Text> */}
+                    </View>
+                    <TouchableOpacity style={styles.arrowRight} onPress={nextRectangle2}>
+                        <Ionicons name="arrow-forward" size={30} color="white" />
+                    </TouchableOpacity>
+                </View>
+
+                {/* Summary */}
+                <View style={styles.summaryBox}>
+                    <Text style={styles.summaryTitle}>Summary</Text>
+                    <Text style={styles.summaryText}>{summaries[0][rectangleIndex1]}</Text>
+                    <Text style={styles.summaryText}>{summaries[1][rectangleIndex2]}</Text>
+                </View>
 
                 <TouchableOpacity style={styles.button} onPress={finishSignup}>
-                    {/* Button */}
                     <Text style={styles.buttonText}>Finish</Text>
                 </TouchableOpacity>
             </LinearGradient>
@@ -134,6 +157,7 @@ const styles = StyleSheet.create({
         marginTop: 100,
         alignSelf: 'flex-start',
         marginLeft: 20,
+        marginBottom: 110,
     },
     welcomeText: {
         color: '#FFFFFF',
@@ -147,49 +171,99 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
     },
-    carouselContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 30,
-    },
     rectangle1: {
-        width: width * 0.7,
-        height: 150,
-        backgroundColor: '#66B13E',
+        width: width * 0.5,
+        marginTop: 'auto',
+        height: 40,
+        backgroundColor: '#FEF7FF',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        padding: 15,
+        padding: 0,
     },
     rectangle2: {
-        width: width * 0.7,
-        height: 150,
-        backgroundColor: '#FF5733',
+        width: width * 0.5,
+        marginTop: 'auto',
+        height: 40,
+        backgroundColor: '#FEF7FF',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        padding: 15,
+        padding: 0,
     },
     rectangle3: {
-        width: width * 0.7,
-        height: 150,
-        backgroundColor: '#3498DB',
+        width: width * 0.5,
+        marginTop: 'auto',
+        height: 40,
+        backgroundColor: '#FEF7FF',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        padding: 15,
+        padding: 0,
     },
+    rectangle4: {
+        width: width * 0.5,
+        marginTop: 'auto',
+        height: 40,
+        backgroundColor: '#FEF7FF',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30,
+        padding: 0,
+    },
+    rectangle5: {
+        width: width * 0.5,
+        marginTop: 'auto',
+        height: 40,
+        backgroundColor: '#FEF7FF',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30,
+        padding: 0,
+    },
+    rectangle6: {
+        width: width * 0.5,
+        marginTop: 'auto',
+        height: 40,
+        backgroundColor: '#FEF7FF',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30,
+        padding: 0,
+    },
+    rectangleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '90%',
+        marginVertical: 10,
+    },    
     rectangleText: {
-        color: 'white',
+        color: 'black',
         fontSize: 18,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         textAlign: 'center',
     },
-    rectangleSubtext: {
-        color: 'white',
+    // rectangleSubtext: {
+    //     color: 'white',
+    //     fontSize: 14,
+    //     marginTop: 10,
+    //     textAlign: 'center',
+    // },
+    summaryBox: {
+        marginTop: 30,
+        backgroundColor: '#E0E0E0',
+        padding: 20,
+        borderRadius: 10,
+        width: '80%',
+    },
+    summaryTitle: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginBottom: 10,
+    },
+    summaryText: {
         fontSize: 14,
-        marginTop: 10,
         textAlign: 'center',
     },
     arrowLeft: {
@@ -211,3 +285,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
+
