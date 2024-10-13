@@ -1,28 +1,30 @@
 const express = require('express');
-const { Transaction, User } = require('../models/User');
-const { predictedBudget } = require('../perplexity');
-// const checkAuth = require('../middleware/checkAuth');
-
+const { predictedBudget } = require('./perplexity'); 
+const { Transaction, User } = require('./models/User'); 
 const router = express.Router();
 
-router.get('/predicted-budget', async (req, res) => {
+router.post('/predicted-budget', async (req, res) => {
+    const { email } = req.body;
+    
     try {
-        const { UserId } = req.body;
-        console.log('UserId', UserId);
-        const user = await User.findById(UserId);
+        const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ success: false, message: "user not found" });
+            return res.status(404).json({ message: 'User not found' });
         }
-        const transactions = await Transaction.find({ user: UserId });
-        const pred_budget = await predictedBudget(transactions, user);
-        if (!pred_budget.success) {
-            return res.status(500).json({ success: false, message: 'failed to predict budget', error: pred_budget.error });
+
+     
+        const transactions = await Transaction.find({ user: user._id });
+
+        const prediction = await predictedBudget(transactions, user);
+
+        if (prediction.success) {
+            res.status(200).json({ budget: prediction.completion });
+        } else {
+            res.status(500).json({ message: 'Failed to predict budget', error: prediction.error });
         }
-        res.status(200).json(pred_budget);
-    }
-    catch (error) {
-        console.error("Unable to predict budget", error);
-        res.status(500).json({ success: false, message: "failed predict" });
+    } catch (error) {
+        console.error('Error in predicted-budget endpoint:', error);
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
 

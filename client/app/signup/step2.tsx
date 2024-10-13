@@ -1,16 +1,15 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, PanResponder, Animated } from 'react-native';
+import React, { useState, useRef,useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, PanResponder, Animated,Alert, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
-
+import { useAuth0, Auth0Provider } from 'react-native-auth0';
 interface CustomSliderProps {
     value: number;
     onValueChange: (value: number) => void;
     minimumValue: number;
     maximumValue: number;
 }
-
 const CustomSlider: React.FC<CustomSliderProps> = ({ value, onValueChange, minimumValue, maximumValue }) => {
     const [sliderWidth, setSliderWidth] = useState(0);
 
@@ -39,14 +38,49 @@ const CustomSlider: React.FC<CustomSliderProps> = ({ value, onValueChange, minim
 export default function SignupStep2() {
     const navigation = useNavigation();
     const [budgetValues, setBudgetValues] = useState([
-        { category: 'Groceries', amount: 2500 },
-        { category: 'Rent', amount: 3500 },
-        { category: 'Utilities', amount: 750 },
-        { category: 'Entertainment', amount: 1000 }
+        { category: 'Food', amount: 2500 },
+        { category: 'Health', amount: 3500 },
+        { category: 'Travel', amount: 750 },
+        { category: 'Other', amount: 1000 }
     ]);
-
+    const[loading,setLoading]=useState(true);
+    const[updateing,setUpdating]=useState(false);
+    const { authorize, getCredentials, getUser } = useAuth0();
     const buttonScale = useRef(new Animated.Value(1)).current;
+    useEffect(()=>{
+        async function getPredictedBudget(){
+            try{
+                setLoading(true);
+                const user = await getUser();
 
+                const email = user ? user.email : "";
+                const response= await fetch('http://localhost:4000/perplexity_predict',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({email:email})
+                });
+                const result= await response.json();
+                if(response.ok && result.budget){
+                    const[food, health,travel,other]=result.budget.split('|').map(Number);
+                    setBudgetValues([
+                        { category: 'Food', amount: food },
+                        { category: 'Health', amount: health },
+                        { category: 'Travel', amount: travel },
+                        { category: 'Other', amount: other }
+                    ]);
+                }else{
+                    Alert.alert("Could not fetch predicted budgets");
+                }
+            }
+            catch(error){
+                console.error('Error fetching predicted budgets, ',error);
+            }
+            finally{
+                setLoading(false);
+            }
+        }
+        getPredictedBudget();
+    },[]);
     const animateButton = () => {
         Animated.sequence([
             Animated.timing(buttonScale, { toValue: 0.95, duration: 100, useNativeDriver: true }),
@@ -64,7 +98,44 @@ export default function SignupStep2() {
         updatedBudget[index].amount = Math.min(Math.max(Math.round(newAmount), 0), 5000);
         setBudgetValues(updatedBudget);
     };
+    const submitBudget = async () => {
+        try {
+            setUpdating(true);
+            // Prepare data for POST request
+            const budget = {
+                food: { max: budgetValues[0].amount },
+                health: { max: budgetValues[1].amount },
+                travel: { max: budgetValues[2].amount },
+                other: { max: budgetValues[3].amount }
+            };
 
+            const response = await fetch('http://localhost:4000/perplexity_predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, budget:budget }) 
+            });
+
+            if (response.ok) {
+                navigation.navigate('step3');
+            } else {
+                Alert.alert('Failed to update budget.');
+            }
+        } catch (error) {
+            console.error('Error updating budget:', error);
+            Alert.alert('Error updating budget.');
+        } finally {
+            setUpdating(false);
+        }
+    };
+    if (loading) {
+        // Show a loading spinner or some message while fetching predicted budgets
+        return (
+            <View style={[styles.container, styles.loadingContainer]}>
+                <ActivityIndicator size="large" color="#66B13E" />
+                <Text style={styles.loadingText}>Loading your budget...</Text>
+            </View>
+        );
+    }
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
@@ -118,10 +189,14 @@ export default function SignupStep2() {
                 <Animated.View style={[styles.continueButtonContainer, { transform: [{ scale: buttonScale }] }]}>
                     <TouchableOpacity 
                         style={styles.continueButton} 
-                        onPress={() => navigateToStep('step3')}
+                        onPress={submitBudget}
                         accessibilityLabel="Continue to next step"
                     >
-                        <Text style={styles.continueButtonText}>Continue</Text>
+                        {updateing ? (
+                            <ActivityIndicator size="small" color="#FFF" />
+                        ) : (
+                            <Text style={styles.continueButtonText}>Continue</Text>
+                        )}
                     </TouchableOpacity>
                 </Animated.View>
             </LinearGradient>
