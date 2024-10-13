@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView,Alert,ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useAuth0, Auth0Provider } from 'react-native-auth0';
 
 const InterestPage = () => {
   const [input, setInput] = useState('');
   const [items, setItems] = useState([]);
-
+  const[loading,setLoading]=useState(false);
   const navigation = useNavigation();
 
   const addItem = () => {
@@ -20,6 +21,39 @@ const InterestPage = () => {
     const newItems = items.filter((_, i) => i !== index);
     setItems(newItems);
   };
+  const submitInterests=async()=>{
+    if(items.length==0){
+      Alert.alert('No Interests added');
+      return;
+    }
+    try{
+      setLoading(true);
+      const { authorize, getCredentials, getUser } = useAuth0();
+
+      const user = await getUser();
+
+      const email = user ? user.email : "";
+      const response=await fetch('http://localhost:8080/interest_update',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',},
+        body:JSON.stringify({email:email,interests:items})
+      });
+
+      if(response.ok){
+        navigation.navigate('step3');
+      }
+      else{
+        Alert.alert('Failed to update interests.')
+      }
+    }
+    catch(error){
+      console.error('Could not submit interests ',error);
+      Alert.alert('Could not submit interests');
+    }
+    finally{
+      setLoading(false);
+    }
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -48,6 +82,14 @@ const InterestPage = () => {
             </View>
           ))}
         </View>
+
+        {loading ? (
+                <ActivityIndicator size="large" color="#28A745" />
+            ) : (
+                <TouchableOpacity  onPress={()=>submitInterests()}style={styles.submitButton}>
+                    <Text style={styles.submitButtonText}>Submit Interests</Text>
+                </TouchableOpacity>
+            )}
 
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home/Home')}>
           <View style={styles.buttonContent}>
