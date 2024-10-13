@@ -4,37 +4,37 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 
-// interface CustomSliderProps {
-//     value: number;
-//     onValueChange: (value: number) => void;
-//     minimumValue: number;
-//     maximumValue: number;
-// }
+interface CustomSliderProps {
+    value: number;
+    onValueChange: (value: number) => void;
+    minimumValue: number;
+    maximumValue: number;
+}
 
-// const CustomSlider: React.FC<CustomSliderProps> = ({ value, onValueChange, minimumValue, maximumValue }) => {
-//     const [sliderWidth, setSliderWidth] = useState(0);
+const CustomSlider: React.FC<CustomSliderProps> = ({ value, onValueChange, minimumValue, maximumValue }) => {
+    const [sliderWidth, setSliderWidth] = useState(0);
 
-//     const panResponder = PanResponder.create({
-//         onStartShouldSetPanResponder: () => true,
-//         onMoveShouldSetPanResponder: () => true,
-//         onPanResponderMove: (_, gestureState) => {
-//             const newValue = (gestureState.moveX / sliderWidth) * (maximumValue - minimumValue) + minimumValue;
-//             onValueChange(Math.max(minimumValue, Math.min(maximumValue, newValue)));
-//         },
-//     });
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (_, gestureState) => {
+            const newValue = (gestureState.moveX / sliderWidth) * (maximumValue - minimumValue) + minimumValue;
+            onValueChange(Math.max(minimumValue, Math.min(maximumValue, newValue)));
+        },
+    });
 
-//     return (
-//         <View
-//             style={styles.sliderContainer}
-//             onLayout={(event) => setSliderWidth(event.nativeEvent.layout.width)}
-//             {...panResponder.panHandlers}
-//         >
-//             <View style={styles.sliderTrack} />
-//             <View style={[styles.sliderFill, { width: `${((value - minimumValue) / (maximumValue - minimumValue)) * 100}%` }]} />
-//             <View style={[styles.sliderThumb, { left: `${((value - minimumValue) / (maximumValue - minimumValue)) * 100}%` }]} />
-//         </View>
-//     );
-// };
+    return (
+        <View
+            style={styles.sliderContainer}
+            onLayout={(event) => setSliderWidth(event.nativeEvent.layout.width)}
+            {...panResponder.panHandlers}
+        >
+            <View style={styles.sliderTrack} />
+            <View style={[styles.sliderFill, { width: `${((value - minimumValue) / (maximumValue - minimumValue)) * 100}%` }]} />
+            <View style={[styles.sliderThumb, { left: `${((value - minimumValue) / (maximumValue - minimumValue)) * 100}%` }]} />
+        </View>
+    );
+};
 
 export default function SignupStep2() {
     const navigation = useNavigation();
@@ -91,12 +91,12 @@ export default function SignupStep2() {
                                     keyboardType="numeric"
                                 />
                             </View>
-                            {/* <CustomSlider
+                            <CustomSlider
                                 minimumValue={0}
                                 maximumValue={100000}
                                 value={item.amount}
                                 onValueChange={(value: number) => updateBudget(index, value)}
-                            /> */}
+                            />
                         </View>
                     ))}
                 </ScrollView>
