@@ -39,13 +39,17 @@ export default function SignupStep1() {
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
-                    {/* Button */}
-                    <Text style={styles.buttonText}>Link Bank Account</Text>
+                    <View style={styles.buttonContent}>
+                        <Ionicons name="open-outline" size={24} color="#66B13E" />
+                        <Text style={styles.buttonText}>Link Bank Account</Text>
+                    </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
-                    {/* Button */}
-                    <Text style={styles.buttonText}>Link Credit Card</Text>
+                    <View style={styles.buttonContent}>
+                        <Ionicons name="open-outline" size={24} color="#66B13E" />
+                        <Text style={styles.buttonText}>Link Credit Card</Text>
+                    </View>
                 </TouchableOpacity>
 
             </LinearGradient>
@@ -101,16 +105,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    button :{
-        marginTop: 50,  // Adds space between the text and the button
-        backgroundColor: '#FFFFFF',  // White background for the button
-        paddingVertical: 15,  // Vertical padding for button height
-        paddingHorizontal: 40,  // Horizontal padding for button width
-        borderRadius: 25,  // Rounded corners for the button
+    button: {
+        marginTop: 50,
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 15,
+        paddingHorizontal: 20,  // Reduced horizontal padding
+        borderRadius: 25,
     },
-    buttonText : {
-        color: '#66B13E',  // Button text color
-        fontSize: 18,  // Text size
+    buttonContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonText: {
+        color: '#66B13E',
+        fontSize: 18,
         fontWeight: 'bold',
+        marginLeft: 10,  // Add some space between the icon and text
     },
 });
