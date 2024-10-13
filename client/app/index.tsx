@@ -1,23 +1,12 @@
-import { Text, View, Button } from "react-native";
+import React, { useState } from "react";
+import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
+import LinearGradient from 'react-native-linear-gradient';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
-import { useState } from 'react';
-
-const LogoutButton = () => {
-  const { clearSession } = useAuth0();
-
-  const onPress = async () => {
-    try {
-      await clearSession();
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  return <Button onPress={onPress} title="Log out" />
-}
+import { useNavigation } from '@react-navigation/native';
 
 const LoginButton = ({ setAccessToken }) => {
   const { authorize, getCredentials } = useAuth0();
+  const navigation = useNavigation();
 
   const onPress = async () => {
     try {
@@ -25,65 +14,79 @@ const LoginButton = ({ setAccessToken }) => {
       const credentials = await getCredentials();
       if (credentials) {
         setAccessToken(credentials.accessToken);
+        navigation.navigate("signup/step1"); // Navigate to signup page
       }
     } catch (e) {
       console.log(e);
     }
   };
 
-  return <Button onPress={onPress} title="Log in" />
-}
-
-const FetchProtectedApiButton = ({ accessToken }) => {
-  console.log(accessToken);
-  const fetchProtectedApi = async () => {
-    if (!accessToken) {
-      console.log("No access token available. Please log in.");
-      return;
-    }
-
-    try {
-      const response = await fetch('http://localhost:4000/authorized', {
-        method: 'GET',
-        headers: {
-          authorization: `Bearer ${accessToken}`, // Attach the access token
-        },
-      });
-
-      if (response.status === 401) {
-        console.log('Unauthorized - Invalid token');
-      } else {
-        const data = await response.text();
-        console.log('Protected API response:', data);
-      }
-    } catch (error) {
-      console.error('Error fetching protected API:', error);
-    }
-  };
-
-  return <Button onPress={fetchProtectedApi} title="Fetch Protected API" />
-}
-
+  return (
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={styles.buttonText}>Login with Auth0</Text>
+    </TouchableOpacity>
+  );
+};
 
 export default function Index() {
   const [accessToken, setAccessToken] = useState(null);
 
   return (
     <Auth0Provider domain={"dev-w5mc4qlyvvazlxk2.us.auth0.com"} clientId={"lBSMealba0tfz3VOyuwVBsR6mZKfrGcX"}>
-      {/* your application */}
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <LoginButton setAccessToken={setAccessToken} />
-        <LogoutButton />
-        <FetchProtectedApiButton accessToken={accessToken} />
-        <Text>Edit app/index.tsx to edit this screen.</Text>
-      </View>
+      <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
+        <View style={styles.textContainer}>
+          <Text style={styles.welcomeText}>RomeRich</Text>
+        </View>
+        <View style={styles.container}>
+          <LoginButton setAccessToken={setAccessToken} />
+        </View>
+      </LinearGradient>
     </Auth0Provider>
-
   );
 }
+
+const styles = StyleSheet.create({
+  textContainer: {
+    position: 'absolute',
+    top: 50, // Adjust this to control how far from the top the text is
+    alignSelf: 'center', // Horizontally center the text
+  },
+  welcomeText: {
+    color: '#FFFFFF', // White text
+    marginTop: 30, // Margin from the top
+    fontSize: 32, // Font size 32
+    fontFamily: 'Roboto', // Font style Roboto (Make sure Roboto is available or use Expo fonts)
+    fontWeight: 'bold',
+  },
+  gradient: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  text: {
+    fontSize: 18,
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#D3D3D3', // Light gray background
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    shadowColor: '#000', // Shadow color for iOS style
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5, // For Android shadow
+  },
+  buttonText: {
+    fontSize: 18, // Bigger font size for the button text
+    fontWeight: 'bold',
+    color: '#000',
+    textAlign: 'center',
+  },
+});
