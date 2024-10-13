@@ -163,7 +163,7 @@ export default function SignupStep3() {
 
                 {/* Summary */}
                 <View style={styles.summaryBox}>
-                    <Text style={styles.summaryTitle}>Summary</Text>
+                    <Text style={styles.summaryTitle}>Investing Methodology</Text>
                     <Text style={styles.summaryText}>{summaries[0][rectangleIndex1]}</Text>
                     <Text style={styles.summaryText}>{summaries[1][rectangleIndex2]}</Text>
                 </View>
@@ -330,13 +330,13 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 40,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#C0DFB0',
         paddingVertical: 15,
         paddingHorizontal: 40,
         borderRadius: 25,
     },
     buttonText: {
-        color: '#66B13E',
+        color: '#000000',
         fontSize: 18,
         fontWeight: 'bold',
     },

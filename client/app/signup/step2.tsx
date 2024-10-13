@@ -161,7 +161,7 @@ export default function SignupStep2() {
                 </View>
 
                 <View style={styles.textContainer}>
-                    <Text style={styles.welcomeText}>How is your budget?</Text>
+                    <Text style={styles.welcomeText}>What is your budget?</Text>
                 </View>
                 
                 <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
@@ -355,5 +355,14 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 1},
         shadowOpacity: 0.2,
         shadowRadius: 1,
+    },
+    loadingContainer: {
+        padding: 20,                // Adds some padding around the content
+    },
+    loadingText: {
+        fontSize: 16,               // Text size for the loading message
+        color: '#333',              // Text color for better contrast
+        marginTop: 10,              // Adds space between the spinner and text
+        textAlign: 'center',        // Centers the text
     },
 });
