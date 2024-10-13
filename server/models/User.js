@@ -9,6 +9,7 @@ const User_Schema = new mongoose.Schema({
         expiryDate: { type: String },
         cvv: { type: String }
     },
+    goals:[{destination:{type:String},cost:{type:Number}}],
     wallet: { type: Number, default: 0 },
     income: { type: Number },
     budget: {

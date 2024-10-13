@@ -30,7 +30,7 @@ router.post('/init-account', async (req, res) => {
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
     try {
-        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests } = req.body;
+        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests, goals} = req.body;
 
         // Create new user with email and password
         const newUser = new User({
@@ -38,6 +38,7 @@ router.post('/create', async (req, res) => {
             password,
             income,
             interests,
+            goals:[],
             wallet: 0,
             creditCard: {
                 number: creditCard.number,
