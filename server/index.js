@@ -5,7 +5,9 @@ const { jwtCheck, jwtCheckWithCustomError } = require('./middleware/checkAuth');
 const db = require('./mongodb/mongoDB');
 require('dotenv').config();
 const accountsRoute = require('./routes/account');
-const predictionsRoute= require('./routes/perplexity_predict')
+
+const predictionsRoute = require('./routes/perplexity_predict')
+
 app.use(express.json());
 
 //Middleware for auth information
@@ -16,7 +18,7 @@ app.get('/authorized', (req, res) => {
 });
 
 app.use('/accounts', accountsRoute);
-app.use('/perplexity_predict',predictionsRoute);
+app.use('/perplexity_predict', predictionsRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
