@@ -10,6 +10,14 @@ export default function SignupStep3() {
     const navigation = useNavigation();
     const [rectangleIndex, setRectangleIndex] = useState(0);
 
+    const finishSignup = () => {
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home/Home' }], // replace 'home' with your actual home page route
+        });
+    };
+
+
     const navigateToStep = (step) => {
         navigation.navigate(`signup/${step}`);
     };
@@ -83,7 +91,7 @@ export default function SignupStep3() {
                     <Ionicons name="arrow-forward" size={30} color="white" />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                <TouchableOpacity style={styles.button} onPress={finishSignup}>
                     {/* Button */}
                     <Text style={styles.buttonText}>Finish</Text>
                 </TouchableOpacity>
