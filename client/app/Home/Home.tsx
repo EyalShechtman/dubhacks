@@ -83,7 +83,7 @@ export default function Home() {
                     <Ionicons name="home" size={24} color="white" />
                     <Text style={styles.navText}>Home</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Goals/Goals')}>
                     <Ionicons name="list" size={24} color="white" />
                     <Text style={styles.navText}>Goals</Text>
                 </TouchableOpacity>

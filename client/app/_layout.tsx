@@ -31,6 +31,8 @@ export default function RootLayout() {
           headerShown: false, // Hide the header
         }}
       />
+      <Stack.Screen name="Home/Home" options={{ headerShown: false }} />
+      <Stack.Screen name="Goals/Goals" options={{ headerShown: false }} />
     </Stack>
   );
 }
