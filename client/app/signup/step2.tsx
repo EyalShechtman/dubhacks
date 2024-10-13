@@ -38,9 +38,9 @@ export default function SignupStep2() {
                     <TouchableOpacity onPress={() => navigateToStep('step1')}>
                         <View style={styles.dotInactive} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigateToStep('step2')}>
+                    {/* <TouchableOpacity onPress={() => navigateToStep('step2')}>
                         <View style={styles.dot} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity onPress={() => navigateToStep('step3')}>
                         <View style={styles.dotInactive} />
                     </TouchableOpacity>
@@ -48,7 +48,7 @@ export default function SignupStep2() {
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How is your budget?</Text>
                 </View>
-                <ScrollView style={styles.scrollView}>
+                {/* <ScrollView style={styles.scrollView}>
                     {budgetValues.map((item, index) => (
                         <View key={index} style={styles.budgetItem}>
                             <View style={styles.labelContainer}>
@@ -72,7 +72,7 @@ export default function SignupStep2() {
                             />
                         </View>
                     ))}
-                </ScrollView>
+                </ScrollView> */}
                 <TouchableOpacity style={styles.continueButton} onPress={() => navigateToStep('step3')}>
                     <Text style={styles.continueButtonText}>Continue</Text>
                 </TouchableOpacity>

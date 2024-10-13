@@ -124,23 +124,20 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         marginTop: 100,
-        alignSelf: 'center',
-        paddingHorizontal: 20,
+        alignSelf: 'flex-start',
+        marginLeft: 20,
     },
     welcomeText: {
         color: '#FFFFFF',
         fontSize: 28,
         fontFamily: 'Roboto',
         fontWeight: 'bold',
-        textAlign: 'center',
     },
     gradient: {
         flex: 1,
         width: '100%',
         height: '100%',
-        justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingTop: 100,
     },
     carouselContainer: {
         flexDirection: 'row',
