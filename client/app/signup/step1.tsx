@@ -35,7 +35,7 @@ export default function SignupStep1() {
                 </View>
                 {/* Text Container */}
                 <View style={styles.textContainer}>
-                    <Text style={styles.welcomeText}>How Would you like to transfer funds?</Text>
+                    <Text style={styles.welcomeText}>How would you like to transfer funds?</Text>
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
@@ -51,7 +51,6 @@ export default function SignupStep1() {
                         <Text style={styles.buttonText}>Link Credit Card</Text>
                     </View>
                 </TouchableOpacity>
-
             </LinearGradient>
         </View>
     );
@@ -59,7 +58,7 @@ export default function SignupStep1() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,  // Ensure the container takes up the full screen
+        flex: 1,
     },
     backArrow: {
         position: 'absolute',
@@ -68,49 +67,51 @@ const styles = StyleSheet.create({
     },
     dotsContainer: {
         position: 'absolute',
-        top: 100,   // Move the dots to the top
-        left: 60,  // Align the dots with the back arrow
+        top: 60,
+        alignSelf: 'center',
         flexDirection: 'row',
-        alignItems: 'center', // Align dots vertically in a row
+        alignItems: 'center',
     },
     dot: {
-        height: 15,
-        width: 15,
-        borderRadius: 10,
-        backgroundColor: 'white', // Active dot white
-        marginHorizontal: 5,
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        backgroundColor: 'white',
+        marginHorizontal: 4,
     },
     dotInactive: {
-        height: 15,
-        width: 15,
-        borderRadius: 10,
-        backgroundColor: 'black', // Inactive dots black
-        marginHorizontal: 5,
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        marginHorizontal: 4,
     },
     textContainer: {
-        marginTop: 150,
-        alignSelf: 'center',  // Center the text
+        marginTop: 100,
+        alignSelf: 'center',
+        paddingHorizontal: 20,
     },
     welcomeText: {
-        color: '#FFFFFF', // White text
-        fontSize: 32,     // Font size 32
-        fontFamily: 'Roboto', // Font style Roboto (Make sure Roboto is available or use Expo fonts)
+        color: '#FFFFFF',
+        fontSize: 28,
+        fontFamily: 'Roboto',
         fontWeight: 'bold',
         textAlign: 'center',
     },
     gradient: {
-        flex: 1,  // Ensure the gradient takes up the full screen
-        width: '100%',  // Take full width
-        height: '100%',  // Take full height
+        flex: 1,
+        width: '100%',
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },
     button: {
-        marginTop: 50,
+        marginTop: 30,
         backgroundColor: '#FFFFFF',
         paddingVertical: 15,
-        paddingHorizontal: 20,  // Reduced horizontal padding
+        paddingHorizontal: 20,
         borderRadius: 25,
+        width: '80%',
     },
     buttonContent: {
         flexDirection: 'row',
@@ -121,6 +122,6 @@ const styles = StyleSheet.create({
         color: '#66B13E',
         fontSize: 18,
         fontWeight: 'bold',
-        marginLeft: 10,  // Add some space between the icon and text
+        marginLeft: 10,
     },
 });
