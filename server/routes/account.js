@@ -2,10 +2,26 @@ const express = require('express');
 const router = express.Router();
 const { User, Transaction } = require('../models/User');
 
+
+router.post('/init-account', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        let user = new User({ email });
+
+        await user.save();
+
+        res.status(201).json({ message: 'User account created successfully' });
+    } catch (err) {
+        console.error('Error creating user account:', err);
+        res.status(500).json({ error: 'Failed to create user account' });
+    }
+});
+
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
     try {
-        const { email, password, creditCard, budget, transactions, investmentPortfolio, income,interests } = req.body;
+        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests } = req.body;
 
         // Create new user with email and password
         const newUser = new User({
@@ -13,7 +29,7 @@ router.post('/create', async (req, res) => {
             password,
             income,
             interests,
-            wallet:0,
+            wallet: 0,
             creditCard: {
                 number: creditCard.number,
                 expiryDate: creditCard.expiryDate,

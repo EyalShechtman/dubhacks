@@ -11,6 +11,42 @@ export default function SignupStep1() {
         navigation.navigate(`signup/${step}`);
     };
 
+    const submitInterests = async () => {
+        if (items.length == 0) {
+            Alert.alert('No Interests added');
+            return;
+        }
+        try {
+            setLoading(true);
+
+            console.log(user);
+
+            const email = user ? user.email : "";
+            console.log(email);
+            const response = await fetch('http://localhost:4000/interest_update/interest_update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', },
+                body: JSON.stringify({ email: email, interests: items })
+            });
+
+            console.log(response);
+
+            if (response.ok) {
+                navigation.navigate('step3');
+            }
+            else {
+                Alert.alert('Failed to update interests.')
+            }
+        }
+        catch (error) {
+            console.error('Could not submit interests ', error);
+            Alert.alert('Could not submit interests');
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>

@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Alert,
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useAuth0 } from 'react-native-auth0';
-import { use } from '../../../server/routes/account';
 
 const InterestPage = () => {
   const [input, setInput] = useState('');

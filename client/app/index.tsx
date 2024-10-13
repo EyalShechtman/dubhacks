@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { useNavigation } from '@react-navigation/native';
 
+
 const LoginButton = ({ setAccessToken }) => {
   const { authorize, getCredentials } = useAuth0();
   const navigation = useNavigation();
@@ -14,6 +15,7 @@ const LoginButton = ({ setAccessToken }) => {
       const credentials = await getCredentials();
       if (credentials) {
         setAccessToken(credentials.accessToken);
+
         navigation.navigate("signup/step1"); // Navigate to signup page
       }
     } catch (e) {
