@@ -133,7 +133,7 @@ export default function SignupStep2() {
         return (
             <View style={[styles.container, styles.loadingContainer]}>
                 <ActivityIndicator size="large" color="#66B13E" />
-                <Text style={styles.loadingText}>Loading your budget...</Text>
+                <Text style={styles.loadingText}>Predicting your budget...</Text>
             </View>
         );
     }

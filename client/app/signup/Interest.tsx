@@ -87,12 +87,6 @@ const InterestPage = () => {
           </TouchableOpacity>
         )}
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home/Home')}>
-          <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>Link Credit Card</Text>
-          </View>
-        </TouchableOpacity>
-
       </LinearGradient>
     </ScrollView>
   );
