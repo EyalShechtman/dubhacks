@@ -34,6 +34,9 @@ export default function Home() {
                     ▲ {changeInDollar} ({changeInPerc}%) Past Month
                 </Text>
                 <Ionicons name="settings" size={24} color="white" style={styles.settingsIcon} />
+                <TouchableOpacity onPress={() => navigation.navigate('Profile/Profile')}>
+                    <Ionicons name="settings" size={24} color="white" style={styles.settingsIcon} />
+                </TouchableOpacity>
             </View>
 
             {/* Static Line Chart */}

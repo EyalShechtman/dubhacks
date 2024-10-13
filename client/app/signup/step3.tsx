@@ -100,8 +100,12 @@ export default function SignupStep3() {
     ];
 
     const summaries = [
-        ['Summary for Set 1, Option 1', 'Summary for Set 1, Option 2', 'Summary for Set 1, Option 3'],
-        ['Summary for Set 2, Option 1', 'Summary for Set 2, Option 2', 'Summary for Set 2, Option 3'],
+        ['- Invests spare change from rounded-up transactions.', 
+            '- Invests leftover funds from underspending the monthly budget.', 
+            '- Combines round-ups and monthly surplus for investments.'],
+        ['- Prioritizes low-risk investments like bonds and secure ETFs.', 
+            '- Balances risk by investing in popular ETFs and established companies.', 
+            '- Targets high returns with stocks and cryptocurrencies, accepting higher risk.'],
     ];
 
     return (
@@ -301,19 +305,22 @@ const styles = StyleSheet.create({
     // },
     summaryBox: {
         marginTop: 30,
-        backgroundColor: '#E0E0E0',
+        backgroundColor: '#FEF7FF',
         padding: 20,
         borderRadius: 10,
         width: '80%',
+        alignItems: 'center',        // Centers the content horizontally
+        justifyContent: 'center',     // Centers the content vertically
     },
     summaryTitle: {
         fontWeight: 'bold',
         fontSize: 16,
         marginBottom: 10,
+        textAlign: 'center',          // Center-aligns the title text
     },
     summaryText: {
         fontSize: 14,
-        textAlign: 'center',
+        textAlign: 'center',          // Center-aligns the body text
     },
     arrowLeft: {
         marginRight: 10,
