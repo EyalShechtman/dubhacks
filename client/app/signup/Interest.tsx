@@ -43,7 +43,7 @@ const InterestPage = () => {
       console.log(response);
 
       if (response.ok) {
-        navigation.navigate('step3');
+        navigation.navigate('signup/step3');
       }
       else {
         Alert.alert('Failed to update interests.')

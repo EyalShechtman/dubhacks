@@ -1,46 +1,43 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
+import { useAuth0 } from 'react-native-auth0';
+import { use } from '../../../server/routes/account';
 
 export default function SignupStep1() {
     const navigation = useNavigation();
+    const [loading, setLoading] = useState(true);
+    const { authorize, user } = useAuth0();
 
     const navigateToStep = (step) => {
         navigation.navigate(`signup/${step}`);
     };
 
-    const submitInterests = async () => {
-        if (items.length == 0) {
-            Alert.alert('No Interests added');
-            return;
-        }
+    useEffect(() => {
+        initUser();
+    }, []);
+
+    const initUser = async () => {
         try {
             setLoading(true);
 
-            console.log(user);
-
             const email = user ? user.email : "";
-            console.log(email);
-            const response = await fetch('http://localhost:4000/interest_update/interest_update', {
+            const response = await fetch('http://localhost:4000/accounts/init-account', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', },
-                body: JSON.stringify({ email: email, interests: items })
+                body: JSON.stringify({ email: email })
             });
 
-            console.log(response);
-
-            if (response.ok) {
-                navigation.navigate('step3');
-            }
-            else {
-                Alert.alert('Failed to update interests.')
+            if (response.status === 400) {
+                console.log('Account already initialized');
+            } else if (!response.ok || response.status !== 400) {
+                Alert.alert('Failed to initialize account.');
             }
         }
         catch (error) {
-            console.error('Could not submit interests ', error);
-            Alert.alert('Could not submit interests');
+            Alert.alert('Could not send request');
         }
         finally {
             setLoading(false);

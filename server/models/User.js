@@ -30,8 +30,8 @@ const User_Schema = new mongoose.Schema({
         }
     },
     investmentPortfolio: {
-        investmentComfort: { type: String, enum: ['conservative', 'moderate', 'aggressive'], required: true },
-        investmentType: { type: String, enum: ['roundup', 'budget remaining', 'both'], required: true }
+        investmentComfort: { type: String, enum: ['conservative', 'moderate', 'aggressive'] },
+        investmentType: { type: String, enum: ['roundup', 'budget remaining', 'both'] }
     }
 });
 

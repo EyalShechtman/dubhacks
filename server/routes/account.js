@@ -7,6 +7,14 @@ router.post('/init-account', async (req, res) => {
     try {
         const { email } = req.body;
 
+        // Check if the user with the provided email already exists
+        const existingUser = await User.findOne({ email: email });
+
+        if (existingUser) {
+            return res.status(400).json({ error: 'User with this email already exists' });
+        }
+
+        // If no user exists with the email, create a new user
         let user = new User({ email });
 
         await user.save();
@@ -17,6 +25,7 @@ router.post('/init-account', async (req, res) => {
         res.status(500).json({ error: 'Failed to create user account' });
     }
 });
+
 
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
