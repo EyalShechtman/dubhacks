@@ -102,6 +102,9 @@ export default function SignupStep2() {
         try {
             setUpdating(true);
             // Prepare data for POST request
+            const user = await getUser();
+
+            const email = user ? user.email : "";
             const budget = {
                 food: { max: budgetValues[0].amount },
                 health: { max: budgetValues[1].amount },
