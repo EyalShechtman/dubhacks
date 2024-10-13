@@ -24,11 +24,11 @@ async function fakedata() {
         await Transaction.deleteMany({});
 
         const users = [
-            { email: 'ethanle425@gmail.com', password: 'epicswag',income:123000 },
-            { email: 'lakshey23@gmail.com', password: 'Lakshey123!',income:93000 },
-            { email: 'tsamples445@gmail.com', password: 'omegalul@#',income:40000 },
-            { email: 'eyalllllll1@gmail.com', password: 'peepopeepopeepo23',income:50000 },
-            { email: 'bigmanmoves23@gmail.com', password: 'bowowowow3',income:60000 }
+            { email: 'ethanle425@gmail.com', password: 'epicswag',income:123000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
+            { email: 'lakshey23@gmail.com', password: 'Lakshey123!',income:93000 , investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
+            { email: 'tsamples445@gmail.com', password: 'omegalul@#',income:40000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
+            { email: 'eyalllllll1@gmail.com', password: 'peepopeepopeepo23',income:50000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
+            { email: 'bigmanmoves23@gmail.com', password: 'bowowowow3',income:60000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  }
         ];
 
         const user_list = [];
