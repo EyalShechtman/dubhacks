@@ -1,32 +1,47 @@
-const mongoose= require('mongoose');
-const MONGODB_URI='mongodb+srv://lakshey2016:Lakshey123!@romerest.ik1wu.mongodb.net/?retryWrites=true&w=majority&appName=RomeRest';
+const mongoose = require('mongoose');
 
-
-
-mongoose.connect(MONGODB_URI)
-.then(()=>console.log('Connect success'))
-.catch((err)=>console.error('Connection error',err));
-
-
-
-const User_Schema=new mongoose.Schema({
-    email:{type:String, required:true},
-    password:{type:String,required:true},
-    interests:{type:String}
-
+const User_Schema = new mongoose.Schema({
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    creditCard: {
+        number: { type: String, required: true },
+        expiryDate: { type: String, required: true },
+        cvv: { type: String, required: true }
+    },
+    budget: {
+        food: {
+            max: { type: Number, required: true },
+            spent: { type: Number, required: true }
+        },
+        travel: {
+            max: { type: Number, required: true },
+            spent: { type: Number, required: true }
+        },
+        health: {
+            max: { type: Number, required: true },
+            spent: { type: Number, required: true }
+        },
+        other: {
+            max: { type: Number, required: true },
+            spent: { type: Number, required: true }
+        }
+    },
+    investmentPortfolio: {
+        investmentComfort: { type: String, enum: ['conservative', 'moderate', 'aggressive'], required: true },
+        investmentType: { type: String, enum: ['roundup', 'budget remaining', 'both'], required: true }
+    }
 });
 
 const Transactions_Schema = new mongoose.Schema({
-    email:{type:mongoose.Schema.Types.ObjectId,ref:'User'},
-    vendor_name:{type:String},
-    category:{type:String},
-    amount:{type:Number},
-    date:{type:Date,default:Date.now},
-    location:{type:String}
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    vendor_name: { type: String },
+    category: { type: String },
+    amount: { type: Number },
+    date: { type: Date, default: Date.now },
+    location: { type: String }
 });
 
-const User=mongoose.model('User',User_Schema);
-const Transaction=mongoose.model('Transaction',Transactions_Schema);
+const User = mongoose.model('User', User_Schema);
+const Transaction = mongoose.model('Transaction', Transactions_Schema);
 
-
-module.exports={User,Transaction};
+module.exports = { User, Transaction };
