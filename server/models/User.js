@@ -8,22 +8,23 @@ const User_Schema = new mongoose.Schema({
         expiryDate: { type: String, required: true },
         cvv: { type: String, required: true }
     },
+    income:{type:Number,required:true},
     budget: {
         food: {
-            max: { type: Number, required: true },
-            spent: { type: Number, required: true }
+            max: { type: Number,default:0},
+            spent: { type: Number}
         },
         travel: {
-            max: { type: Number, required: true },
-            spent: { type: Number, required: true }
+            max: { type: Number,default:0},
+            spent: { type: Number}
         },
         health: {
-            max: { type: Number, required: true },
-            spent: { type: Number, required: true }
+            max: { type: Number,default:0},
+            spent: { type: Number}
         },
         other: {
-            max: { type: Number, required: true },
-            spent: { type: Number, required: true }
+            max: { type: Number,default:0},
+            spent: { type: Number}
         }
     },
     investmentPortfolio: {

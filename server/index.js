@@ -16,11 +16,10 @@ app.get('/authorized', (req, res) => {
 });
 
 app.use('/accounts', accountsRoute);
+app.use('/perplexity_predict',predictionsRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
-app.use('/perplexity_predict',predictionsRoute);
 
 

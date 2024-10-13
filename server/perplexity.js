@@ -1,6 +1,6 @@
-import OpenAI from 'openai';
+const OpenAI=require('openai');
 const perplexity= new OpenAI({apiKey:'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',baseURL:'https://api.perplexity.ai/'});
-async function predictedBudget(transactions){
+async function predictedBudget(transactions,user){
     try{
         const reqData=transactions.map((transac)=>{
                 return `Vendor Name: ${transac.vendor_name}, Transaction Category: ${transac.category}, Amount:${transac.amount},Location:${transac.location}`;
@@ -12,18 +12,33 @@ async function predictedBudget(transactions){
             response_format:{type:'json_object'},
             messages:[{
                 'role':'system',
-                'content':("You are an artificial intelligence in charge of helping a user create a reasonable budget. You will need to output a reasonable number to represent a good budget for the user.")
+                'content':("You are an artificial intelligence in charge of helping a user create a reasonable budget. You will need to output a reasonable number for Food, Health, Travel, and Other to represent a good budget for the user.")
             },
         {
             'role':'user',
-            'content':(`Give a reasonable budget for the user who has a transaction history of ${reqData}.`)
+            'content':(`Give a reasonable budget for the user who has a transaction history of ${reqData} and an annual income of ${user.income}. Please format it as a Json objectin this way:
+                {
+                Food:x
+                Health:x
+                Travel:x
+                Other:x 
+                 }   
+                where x is a number representing for the predicted reasonable budget for each category. Please categorize the transactions accordingly.`)
         }]
         });
         const completion = response.choices[0].message.content;
         console.log('Budget ', completion);
+        let budget;
+        try{
+            budget=JSON.parse(completion);
+        }
+        catch(parseError){
+            console.warn('unable to parse to json');
+            budget=completion;
+        }
         return{
             success:true,
-            budget:completion,
+            budget:budget,
         };
     }
     catch(error){
@@ -35,4 +50,5 @@ async function predictedBudget(transactions){
         };
     }
 }
+
 export default predictedBudget;
