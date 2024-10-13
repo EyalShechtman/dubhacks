@@ -52,10 +52,10 @@ export default function RootLayout() {
             headerShown: false,
           })}
         >
-          <Tab.Screen name="Home/Home" component={Home} />
-          <Tab.Screen name="Goals/Goals" component={Goals} />
-          <Tab.Screen name="Invest/Invest" component={Invest} />
-          <Tab.Screen name="Profile/Profile" component={Profile} />
+          <Tab.Screen name="Home/Home" component={Home} options={{ tabBarLabel: 'Home' }} />
+          <Tab.Screen name="Goals/Goals" component={Goals} options={{ tabBarLabel: 'Goals' }} />
+          <Tab.Screen name="Invest/Invest" component={Invest} options={{ tabBarLabel: 'Invest' }} />
+          <Tab.Screen name="Profile/Profile" component={Profile} options={{ tabBarLabel: 'Profile' }} />
         </Tab.Navigator>
       ) : (
         // Before the user has signed up, show the signup flow
