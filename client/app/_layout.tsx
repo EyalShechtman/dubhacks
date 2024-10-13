@@ -33,6 +33,8 @@ export default function RootLayout() {
       />
       <Stack.Screen name="Home/Home" options={{ headerShown: false }} />
       <Stack.Screen name="Goals/Goals" options={{ headerShown: false }} />
+      <Stack.Screen name="Invest/Invest" options={{ headerShown: false }} />
+      <Stack.Screen name="Profile/Profile" options={{ headerShown: false }} />
     </Stack>
   );
 }

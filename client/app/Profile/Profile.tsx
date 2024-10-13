@@ -4,15 +4,14 @@ import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Goals() {
-
+export default function Profile() {
     const navigation = useNavigation();
 
     return (
         <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
             {/* Goals Section */}
             <View style={styles.goalsContainer}>
-                <Text style={styles.sectionTitle}>Your Goals</Text>
+                <Text style={styles.sectionTitle}>Your Profile</Text>
                 {/* Add content for goals here */}
             </View>
 
@@ -22,7 +21,7 @@ export default function Goals() {
                     <Ionicons name="home" size={24} color="white" />
                     <Text style={styles.navText}>Home</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Goals/Goals')} >
                     <Ionicons name="list" size={24} color="white" />
                     <Text style={styles.navText}>Goals</Text>
                 </TouchableOpacity>
@@ -30,7 +29,7 @@ export default function Goals() {
                     <Ionicons name="cash" size={24} color="white" />
                     <Text style={styles.navText}>Invest</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile/Profile')}>
+                <TouchableOpacity style={styles.navItem}>
                     <Ionicons name="person" size={24} color="white" />
                     <Text style={styles.navText}>Profile</Text>
                 </TouchableOpacity>

@@ -87,11 +87,11 @@ export default function Home() {
                     <Ionicons name="list" size={24} color="white" />
                     <Text style={styles.navText}>Goals</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Invest/Invest')}>
                     <Ionicons name="cash" size={24} color="white" />
                     <Text style={styles.navText}>Invest</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Profile/Profile')}>
                     <Ionicons name="person" size={24} color="white" />
                     <Text style={styles.navText}>Profile</Text>
                 </TouchableOpacity>
