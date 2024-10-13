@@ -1,5 +1,6 @@
+require('dotenv').config();
 const mongoose= require('mongoose');
-const{User,Transaction}=require('../models');
+const{User,Transaction}=require('./models/User');
 const MONGODB_URI='mongodb+srv://lakshey2016:Lakshey123!@romerest.ik1wu.mongodb.net/?retryWrites=true&w=majority&appName=RomeRest';
 
 mongoose.connect(MONGODB_URI)
