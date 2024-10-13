@@ -110,7 +110,7 @@ export default function SignupStep2() {
                 other: { max: budgetValues[3].amount }
             };
 
-            const response = await fetch('http://localhost:4000/perplexity_predict', {
+            const response = await fetch('http://localhost:4000/perplexity_predict/perplexity_predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: email, budget:budget }) 
