@@ -9,7 +9,7 @@ const InterestPage = () => {
   const [items, setItems] = useState([]);
   const[loading,setLoading]=useState(false);
   const navigation = useNavigation();
-
+  const { authorize, getCredentials, getUser } = useAuth0();
   const addItem = () => {
     if (input.trim()) {
       setItems([...items, input]);
@@ -28,7 +28,6 @@ const InterestPage = () => {
     }
     try{
       setLoading(true);
-      const { authorize, getCredentials, getUser } = useAuth0();
 
       const user = await getUser();
 
