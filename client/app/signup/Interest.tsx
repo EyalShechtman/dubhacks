@@ -7,6 +7,8 @@ const InterestPage = () => {
   const [input, setInput] = useState('');
   const [items, setItems] = useState([]);
 
+  const navigation = useNavigation();
+
   const addItem = () => {
     if (input.trim()) {
       setItems([...items, input]);
@@ -21,7 +23,9 @@ const InterestPage = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Interest in Vacations</Text>
+    <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
+
+      <Text style={styles.title}>What do you do on your vacations?</Text>
 
       <TextInput
         style={styles.input}
@@ -45,15 +49,25 @@ const InterestPage = () => {
           </View>
         ))}
       </View>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home/Home')}>
+            <View style={styles.buttonContent}>
+                <Text style={styles.buttonText}>Link Credit Card</Text>
+            </View>
+        </TouchableOpacity>
+      </LinearGradient>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: '#F5F5F5',
+    flex: 1,
+  },
+  gradient: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: 24,
@@ -104,6 +118,25 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  button: {
+    marginTop: 20,
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    width: '80%',
+    },
+    buttonContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonText: {
+        color: '#66B13E',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginLeft: 10,
+    },
 });
 
 export default InterestPage;
