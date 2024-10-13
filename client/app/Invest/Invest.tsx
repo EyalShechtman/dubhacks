@@ -10,7 +10,7 @@ export default function Invest() {
     const navigation = useNavigation();
     const [investmentType, setInvestmentType] = useState('');
     const [investmentStrategy, setInvestmentStrategy] = useState('');
-    const [investmentAmount, setInvestmentAmount] = useState(10000); // Default amount
+    const [investmentAmount, setInvestmentAmount] = useState(1025.58); // Default amount
 
     // useEffect(() => {
     //     const fetchInvestmentData = async () => {
@@ -46,17 +46,14 @@ export default function Invest() {
     const distribution = getDistribution(investmentStrategy);
 
     const chartData = [
-        { name: 'Conservative', amount: investmentAmount * distribution[0], color: '#4CAF50' },
-        { name: 'Moderate', amount: investmentAmount * distribution[1], color: '#FFC107' },
-        { name: 'Aggressive', amount: investmentAmount * distribution[2], color: '#F44336' },
+        { name: 'Bonds', amount: investmentAmount * distribution[0], color: '#4CAF50' },
+        { name: 'ETFs', amount: investmentAmount * distribution[1], color: '#FFC107' },
+        { name: 'Stocks', amount: investmentAmount * distribution[2], color: '#F44336' },
     ];
 
     return (
         <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
             <View style={styles.goalsContainer}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                    <Ionicons name="arrow-back" size={24} color="#333" />
-                </TouchableOpacity>
                 <Text style={styles.sectionTitle}>Your Investment Account</Text>
 
                 <PieChart
@@ -75,13 +72,13 @@ export default function Invest() {
                     }}
                     accessor="amount"
                     backgroundColor="transparent"
-                    paddingLeft="15"
+                    paddingLeft="5"
                     center={[10, 0]}
                     style={styles.pieChart}
                 />
 
-                <View style={styles.investmentAmountContainer}>
-                    <Text style={styles.investmentAmountText}>${investmentAmount}</Text>
+                <View style={styles.investmentAmountContainer}> 
+                    <Text style={styles.investmentAmountText}>Total Value: ${investmentAmount}</Text>
                 </View>
 
                 <View style={styles.detailsContainer}>
@@ -104,60 +101,74 @@ const styles = StyleSheet.create({
     },
     goalsContainer: {
         padding: 20,
-        backgroundColor: '#F5F5F5',
         flex: 1,
+        justifyContent: 'center',
     },
     backButton: {
         marginBottom: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        alignSelf: 'flex-start',
+        backgroundColor: '#E0E0E0',
+        borderRadius: 20,
     },
     sectionTitle: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 5,
+        marginTop: 40,
         color: '#333',
         textAlign: 'center',
     },
     pieChart: {
-        marginVertical: 8,
+        marginVertical: 20,
         borderRadius: 16,
         alignSelf: 'center',
+        paddingRight: 30,
     },
     investmentAmountContainer: {
-        position: 'absolute',
-        top: '40%',
-        left: 0,
-        right: 0,
-        alignItems: 'center',
+        marginTop: 0,        // Adjust this value to move the text further down from the pie chart
+        alignItems: 'center', // Center-align the text
     },
     investmentAmountText: {
-        fontSize: 24,
+        fontSize: 32,         // Keep the text size large for emphasis
         fontWeight: 'bold',
         color: '#333',
+        textAlign: 'center',  // Ensure the text is centered
     },
-    detailsContainer: {
-        marginTop: 20,
+        detailsContainer: {
+        marginTop: 30,
         backgroundColor: 'white',
-        borderRadius: 10,
-        padding: 15,
+        borderRadius: 15,
+        padding: 20,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 5,
     },
     investmentDetail: {
-        fontSize: 16,
-        marginVertical: 5,
+        fontSize: 18,
+        marginVertical: 10,
         color: '#333',
     },
     button: {
-        marginTop: 20,
-        backgroundColor: '#FFFFFF',
+        marginTop: 30,
+        backgroundColor: '#66B13E',
         paddingVertical: 15,
-        paddingHorizontal: 20,
-        borderRadius: 25,
-        width: '35%',
+        paddingHorizontal: 30,
+        borderRadius: 30,
+        alignSelf: 'center',
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 5,
     },
     buttonText: {
-        color: '#66B13E',
+        color: '#FFFFFF',
         fontSize: 18,
         fontWeight: 'bold',
-        marginLeft: 0,
-        alignContent: 'center',
+        textAlign: 'center',
     },
 });
