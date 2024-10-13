@@ -1,18 +1,18 @@
 const express = require('express');
-const { predictedBudget } = require('./perplexity'); 
-const { Transaction, User } = require('./models/User'); 
+const { predictedBudget } = require('../perplexity');
+const { Transaction, User } = require('../models/User');
 const router = express.Router();
 
 router.post('/predicted-budget', async (req, res) => {
     const { email } = req.body;
-    
+
     try {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-     
+
         const transactions = await Transaction.find({ user: user._id });
 
         const prediction = await predictedBudget(transactions, user);

@@ -6,6 +6,13 @@ const db = require('./mongodb/mongoDB');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const accountsRoute = require('./routes/account');
+const cors = require('cors');
+
+app.use(cors({
+  origin: '*', // Allows requests from any origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+}));
 
 const predictionsRoute = require('./routes/perplexity_predict');
 const interestUpdateRoutes = require('./routes/interest_update');
@@ -35,7 +42,7 @@ app.get('/authorized', (req, res) => {
 
 app.use('/accounts', accountsRoute);
 app.use('/perplexity_predict', predictionsRoute);
-app.use('/interest_update',interestUpdateRoutes)
+app.use('/interest_update', interestUpdateRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

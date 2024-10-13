@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import LineChartComponent from "./LineChart"; // Import LineChartComponent from components folder
 import LinearGradient from 'react-native-linear-gradient';
 
+const screenWidth = Dimensions.get('window').width;
+
 export default function Home() {
     const navigation = useNavigation();
 
@@ -119,12 +121,15 @@ const styles = StyleSheet.create({
         right: 20,
     },
     chartContainer: {
+        width: screenWidth,
+        backgroundColor: '#66B13E', // Green background for the chart
+        paddingVertical: 20, // Ensure there's space for the chart
         paddingHorizontal: 10,
     },
     timeFilters: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginVertical: 80,
+        marginVertical: 10,
     },
     filterButton: {
         paddingHorizontal: 10,
