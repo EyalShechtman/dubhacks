@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import Slider from '@react-native-community/slider';
+// import Slider from '@react-native-community/slider';
 
 export default function SignupStep2() {
     const navigation = useNavigation();
@@ -38,9 +38,9 @@ export default function SignupStep2() {
                     <TouchableOpacity onPress={() => navigateToStep('step1')}>
                         <View style={styles.dotInactive} />
                     </TouchableOpacity>
-                    {/* <TouchableOpacity onPress={() => navigateToStep('step2')}>
+                    <TouchableOpacity onPress={() => navigateToStep('step2')}>
                         <View style={styles.dot} />
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToStep('step3')}>
                         <View style={styles.dotInactive} />
                     </TouchableOpacity>
