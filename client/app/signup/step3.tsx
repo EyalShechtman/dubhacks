@@ -12,8 +12,13 @@ export default function SignupStep1() {
         navigation.navigate(`signup/${step}`);
     };
 
-    const toggleRectangle = () => {
-        setRectangleIndex((prevIndex) => (prevIndex + 1) % 3);  // Cycle through 0, 1, and 2
+    const nextRectangle = () => {
+        setRectangleIndex((prevIndex) => (prevIndex + 1) % 3);
+    };
+
+    // Move to the previous rectangle
+    const prevRectangle = () => {
+        setRectangleIndex((prevIndex) => (prevIndex - 1 + 3) % 3); // Wraps back to the last rectangle
     };
 
     const rectangles = [
@@ -60,16 +65,28 @@ export default function SignupStep1() {
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How would you like to invest?</Text>
                 </View>
-                <TouchableOpacity
-                    style={rectangles[rectangleIndex].style}  // Apply the current rectangle's style
-                    onPress={toggleRectangle}
-                >
+                <TouchableOpacity style={styles.arrowLeft} onPress={prevRectangle}>
+                    <Ionicons name="arrow-back" size={30} color="white" />
+                </TouchableOpacity>
+
+                {/* Rectangle */}
+                <View style={rectangles[rectangleIndex].style}>
                     <Text style={styles.rectangleText}>
-                        {rectangles[rectangleIndex].content}  {/* Display the current rectangle's content */}
+                        {rectangles[rectangleIndex].content}
                     </Text>
                     <Text style={styles.rectangleSubtext}>
-                        {rectangles[rectangleIndex].subtext}  {/* Display the current rectangle's subtext */}
+                        {rectangles[rectangleIndex].subtext}
                     </Text>
+                </View>
+
+                {/* Right Arrow */}
+                <TouchableOpacity style={styles.arrowRight} onPress={nextRectangle}>
+                    <Ionicons name="arrow-forward" size={30} color="white" />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                    {/* Button */}
+                    <Text style={styles.buttonText}>Link Credit Card</Text>
                 </TouchableOpacity>
             </LinearGradient>
         </View>
@@ -131,7 +148,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#66B13E', // Green for Rectangle 1
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 30,
     },
     rectangle2: {
         marginTop: 50,
@@ -160,5 +177,25 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 14,
         marginTop: 10,  // Add space between main text and subtext
-    }
+    },
+    arrowLeft: {
+        position: 'absolute',
+        left: 20,
+    },
+    arrowRight: {
+        position: 'absolute',
+        right: 20,
+    },
+    button: {
+        marginTop: 50,
+        backgroundColor: '#FFFFFF', 
+        paddingVertical: 15, 
+        paddingHorizontal: 40,
+        borderRadius: 25,
+    },
+    buttonText: {
+        color: '#66B13E',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
