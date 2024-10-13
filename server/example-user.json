@@ -45,3 +45,66 @@
         "investmentType": "roundup"
     }
 }
+
+{
+    "email": "john.doe@example.com",
+    "password": "securepassword123",
+    "income": "40000",
+    "creditCard": {
+        "number": "4111-1111-1111-1111",
+        "expiryDate": "12/25",
+        "cvv": "123"
+    },
+    "budget": {
+        "food": {
+            "max": 500,
+            "spent": 200
+        },
+        "travel": {
+            "max": 300,
+            "spent": 50
+        },
+        "health": {
+            "max": 250,
+            "spent": 100
+        },
+        "other": {
+            "max": 400,
+            "spent": 250
+        }
+    },
+    "transactions": [
+        {
+            "vendor_name": "Whole Foods",
+            "category": "Food",
+            "amount": 75.50,
+            "date": "2024-10-01",
+            "location": "New York, NY"
+        },
+        {
+            "vendor_name": "Uber",
+            "category": "Travel",
+            "amount": 25.00,
+            "date": "2024-10-02",
+            "location": "New York, NY"
+        },
+        {
+            "vendor_name": "CVS Pharmacy",
+            "category": "Health",
+            "amount": 45.00,
+            "date": "2024-10-03",
+            "location": "New York, NY"
+        },
+        {
+            "vendor_name": "Amazon",
+            "category": "Other",
+            "amount": 120.00,
+            "date": "2024-10-05",
+            "location": "Online"
+        }
+    ],
+    "investmentPortfolio": {
+        "investmentComfort": "moderate",
+        "investmentType": "roundup"
+    }
+}
