@@ -35,8 +35,19 @@ export default function SignupStep1() {
                 </View>
                 {/* Text Container */}
                 <View style={styles.textContainer}>
-                    <Text style={styles.welcomeText}>How would you like to transfer funds?</Text>
+                    <Text style={styles.welcomeText}>How Would you like to transfer funds?</Text>
                 </View>
+
+                <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                    {/* Button */}
+                    <Text style={styles.buttonText}>Link Bank Account</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                    {/* Button */}
+                    <Text style={styles.buttonText}>Link Credit Card</Text>
+                </TouchableOpacity>
+
             </LinearGradient>
         </View>
     );
@@ -89,5 +100,17 @@ const styles = StyleSheet.create({
         height: '100%',  // Take full height
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    button :{
+        marginTop: 50,  // Adds space between the text and the button
+        backgroundColor: '#FFFFFF',  // White background for the button
+        paddingVertical: 15,  // Vertical padding for button height
+        paddingHorizontal: 40,  // Horizontal padding for button width
+        borderRadius: 25,  // Rounded corners for the button
+    },
+    buttonText : {
+        color: '#66B13E',  // Button text color
+        fontSize: 18,  // Text size
+        fontWeight: 'bold',
     },
 });

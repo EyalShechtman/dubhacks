@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -6,10 +6,33 @@ import LinearGradient from 'react-native-linear-gradient';
 
 export default function SignupStep1() {
     const navigation = useNavigation();
+    const [rectangleIndex, setRectangleIndex] = useState(0);
 
     const navigateToStep = (step) => {
         navigation.navigate(`signup/${step}`);
     };
+
+    const toggleRectangle = () => {
+        setRectangleIndex((prevIndex) => (prevIndex + 1) % 3);  // Cycle through 0, 1, and 2
+    };
+
+    const rectangles = [
+        {
+            style: styles.rectangle1,
+            content: 'Both (Recomended)',
+            subtext: 'A round-up investing account rounds up purchases to the nearest dollar and invests the spare change, helping you grow wealth passively.',
+        },
+        {
+            style: styles.rectangle2,
+            content: 'Round Up',
+            subtext: 'This is text for RoundUP',
+        },
+        {
+            style: styles.rectangle3,
+            content: 'Monthly left overs',
+            subtext: 'this is text for monthly overs',
+        },
+    ];
 
     return (
         <View style={styles.container}>
@@ -35,8 +58,19 @@ export default function SignupStep1() {
                 </View>
                 {/* Text Container */}
                 <View style={styles.textContainer}>
-                    <Text style={styles.welcomeText}>Step 3</Text>
+                    <Text style={styles.welcomeText}>How would you like to invest?</Text>
                 </View>
+                <TouchableOpacity
+                    style={rectangles[rectangleIndex].style}  // Apply the current rectangle's style
+                    onPress={toggleRectangle}
+                >
+                    <Text style={styles.rectangleText}>
+                        {rectangles[rectangleIndex].content}  {/* Display the current rectangle's content */}
+                    </Text>
+                    <Text style={styles.rectangleSubtext}>
+                        {rectangles[rectangleIndex].subtext}  {/* Display the current rectangle's subtext */}
+                    </Text>
+                </TouchableOpacity>
             </LinearGradient>
         </View>
     );
@@ -90,4 +124,41 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    rectangle1: {
+        marginTop: 50,
+        width: 350,
+        height: 150,
+        backgroundColor: '#66B13E', // Green for Rectangle 1
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+    },
+    rectangle2: {
+        marginTop: 50,
+        width: 200,
+        height: 100,
+        backgroundColor: '#FF5733', // Orange for Rectangle 2
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+    },
+    rectangle3: {
+        marginTop: 50,
+        width: 200,
+        height: 100,
+        backgroundColor: '#3498DB', // Blue for Rectangle 3
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+    },
+    rectangleText: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    rectangleSubtext: {
+        color: 'white',
+        fontSize: 14,
+        marginTop: 10,  // Add space between main text and subtext
+    }
 });
