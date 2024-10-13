@@ -5,13 +5,14 @@ const { User, Transaction } = require('../models/User');
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
     try {
-        const { email, password, creditCard, budget, transactions, investmentPortfolio, income } = req.body;
+        const { email, password, creditCard, budget, transactions, investmentPortfolio, income,wallet } = req.body;
 
         // Create new user with email and password
         const newUser = new User({
             email,
             password,
             income,
+            wallet:0,
             creditCard: {
                 number: creditCard.number,
                 expiryDate: creditCard.expiryDate,
