@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     headerContainer: {
-        paddingTop: 40,
+        paddingTop: 30,
         paddingHorizontal: 20,
         backgroundColor: '#66B13E',
         alignItems: 'flex-start',
@@ -122,11 +122,11 @@ const styles = StyleSheet.create({
     },
     chartContainer: {
         width: screenWidth,
-        backgroundColor: '#66B13E', // Green background for the chart
-        paddingVertical: 20, // Ensure there's space for the chart
+        height: 178, // Add a height to ensure the chart has space to render
+        paddingVertical: 0,
         paddingHorizontal: 10,
     },
-    timeFilters: {
+        timeFilters: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginVertical: 10,
