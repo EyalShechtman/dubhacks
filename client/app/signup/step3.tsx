@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter,Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -11,29 +11,30 @@ export default function SignupStep3() {
     const navigation = useNavigation();
     const [rectangleIndex1, setRectangleIndex1] = useState(0); // For the first set
     const [rectangleIndex2, setRectangleIndex2] = useState(0); // For the second set
+    const { authorize, user } = useAuth0();
 
     const finishSignup = async () => {
-        try{
-            await submitInvest();
-        
-        DeviceEventEmitter.emit("event1");
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Home/Home' }],
-        });
-    }catch(error){
-        console.error('Could not finish signup,', error);
-        Alert.alert('Failed to submit investment details');
-    }
-        
+        try {
+            await submitInvestment();
+
+            DeviceEventEmitter.emit("event1");
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home/Home' }],
+            });
+        } catch (error) {
+            console.error('Could not finish signup,', error);
+            Alert.alert('Failed to submit investment details');
+        }
+
     };
-    const submitInvestment=async()=>{
-        const investmentTypes=['roundup', 'budget remaining', 'both'];
-        const investmentComforts=['conservative', 'moderate', 'aggressive'];
-        const investType=investmentTypes[rectangleIndex1];
-        const investComfort=investmentComforts[rectangleIndex2];
-        const { authorize, user } = useAuth0();
-        try{
+
+    const submitInvestment = async () => {
+        const investmentTypes = ['roundup', 'budget remaining', 'both'];
+        const investmentComforts = ['conservative', 'moderate', 'aggressive'];
+        const investType = investmentTypes[rectangleIndex1];
+        const investComfort = investmentComforts[rectangleIndex2];
+        try {
             console.log(user);
 
             const email = user ? user.email : "";
@@ -41,15 +42,15 @@ export default function SignupStep3() {
             const response = await fetch('http://localhost:4000/investment/investment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', },
-                body: JSON.stringify({ email: email, investComfort: investComfort,investType:investType })
-              });
-              const data = await response.json();
-              if(!response.ok){
-                throw new Error(data.message||"failed to submit investment details");
-              }
-              console.log('Investment details: ',data);
-        }catch(error){
-            console.error('Error submitting investment details',error);
+                body: JSON.stringify({ email: email, investComfort: investComfort, investType: investType })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "failed to submit investment details");
+            }
+            console.log('Investment details: ', data);
+        } catch (error) {
+            console.error('Error submitting investment details', error);
             Alert.alert('Error submitting ivnestment details');
         }
     }
