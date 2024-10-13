@@ -46,7 +46,7 @@ async function fakedata() {
             { user: user_list[1]._id, vendor_name: "Walgreens", category: "Health", amount: 103.93, date: new Date('2024-04-12'), location: 'Chicago, IL' },
             { user: user_list[1]._id, vendor_name: "Dave & Busters Co.", category: "Other", amount: 150.56, date: new Date('2024-05-07'), location: 'Chicago, IL' },
             { user: user_list[1]._id, vendor_name: "Copley Memorial Hospital", category: "Health", amount: 976.95, date: new Date('2024-05-08'), location: 'Aurora, IL' },
-            { user: user_list[2]._id, vendor_name: "UW Fiscal Services", category: "Education", amount: 4768.32, date: new Date('2024-09-13'), location: 'Seattle, WA' },
+            { user: user_list[2]._id, vendor_name: "UW Fiscal Services", category: "Other", amount: 4768.32, date: new Date('2024-09-13'), location: 'Seattle, WA' },
             { user: user_list[2]._id, vendor_name: "Saigon Deli", category: "Food", amount: 42.56, date: new Date('2024-09-15'), location: 'Seattle, WA' },
             { user: user_list[2]._id, vendor_name: "Seattle Public Metro", category: "Travel", amount: 4.50, date: new Date('2024-10-01'), location: 'Seattle, WA' },
             { user: user_list[3]._id, vendor_name: "Ivar's Seafood", category: "Food", amount: 67.43, date: new Date('2024-04-11'), location: 'Tukwila, WA' },
