@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import { ProgressBar } from 'react-native-paper'; // Import ProgressBar from react-native-paper
+import { ProgressBar } from 'react-native-paper';
 
 export default function Goals() {
 
@@ -64,14 +64,13 @@ const styles = StyleSheet.create({
     },
     goalsContainer: {
         padding: 20,
-        alignItems: 'center', // Center the content horizontally
-    },
+        },
     sectionTitle: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 10,
         color: '#333',
-        textAlign: 'center', // Center the text horizontally
+        textAlign: 'center', 
         marginTop: 50,
     },
         goalItem: {
