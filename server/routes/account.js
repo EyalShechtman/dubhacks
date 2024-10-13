@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { User, Transaction } = require('../models/User');
 
+const goals = [
+    { destination: 'Japan', cost: 4500 },
+    { destination: 'France', cost: 3200 },
+    { destination: 'Brazil', cost: 1800 },
+];
 
 router.get('/get-intrests', async (req, res) => {
 
@@ -31,7 +36,7 @@ router.post('/init-account', async (req, res) => {
         }
 
         // If no user exists with the email, create a new user
-        let user = new User({ email });
+        let user = new User({ email: email, recommendations: goals });
 
         await user.save();
 

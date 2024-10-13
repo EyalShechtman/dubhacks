@@ -17,6 +17,7 @@ app.use(cors({
 const predictionsRoute = require('./routes/perplexity_predict');
 const interestUpdateRoutes = require('./routes/interest_update');
 const investmentRoutes = require('./routes/investment');
+const recommendedDestination = require('./routes/recommendedDestinations');
 const MONGODB_URI = 'mongodb+srv://lakshey2016:Lakshey123!@romerest.ik1wu.mongodb.net/roamerest?retryWrites=true&w=majority&appName=RomeRest';
 
 // Check if the connection is already established
@@ -45,6 +46,7 @@ app.use('/accounts', accountsRoute);
 app.use('/perplexity_predict', predictionsRoute);
 app.use('/interest_update', interestUpdateRoutes)
 app.use('/investment', investmentRoutes)
+app.use('/recommendedDestination', recommendedDestination)
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
