@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,17 +19,17 @@ export default function SignupStep3() {
         const investmentStrategy = rectangles2[rectangleIndex2].content;
 
         // Save the investment data to AsyncStorage
-        try {
-            await submitInvestment();
+        // try {
+        //     await submitInvestment();
 
-            await AsyncStorage.setItem('investmentData', JSON.stringify({
-                investmentType,
-                investmentStrategy
-            }));
-        } catch (error) {
-            console.error('Could not finish signup,', error);
-            Alert.alert('Failed to submit investment details');
-        }
+        //     await AsyncStorage.setItem('investmentData', JSON.stringify({
+        //         investmentType,
+        //         investmentStrategy
+        //     }));
+        // } catch (error) {
+        //     console.error('Could not finish signup,', error);
+        //     Alert.alert('Failed to submit investment details');
+        // }
 
         // Emit event (if needed)
         DeviceEventEmitter.emit("event1");

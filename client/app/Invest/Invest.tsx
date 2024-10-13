@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
 import { PieChart } from "react-native-chart-kit";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from "@expo/vector-icons";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Invest() {
     const navigation = useNavigation();
@@ -12,22 +12,22 @@ export default function Invest() {
     const [investmentStrategy, setInvestmentStrategy] = useState('');
     const [investmentAmount, setInvestmentAmount] = useState(10000); // Default amount
 
-    useEffect(() => {
-        const fetchInvestmentData = async () => {
-            try {
-                const data = await AsyncStorage.getItem('investmentData');
-                if (data) {
-                    const { investmentType, investmentStrategy } = JSON.parse(data);
-                    setInvestmentType(investmentType);
-                    setInvestmentStrategy(investmentStrategy);
-                }
-            } catch (error) {
-                console.error('Error fetching investment data:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchInvestmentData = async () => {
+    //         try {
+    //             const data = await AsyncStorage.getItem('investmentData');
+    //             if (data) {
+    //                 const { investmentType, investmentStrategy } = JSON.parse(data);
+    //                 setInvestmentType(investmentType);
+    //                 setInvestmentStrategy(investmentStrategy);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching investment data:', error);
+    //         }
+    //     };
 
-        fetchInvestmentData();
-    }, []);
+    //     fetchInvestmentData();
+    // }, []);
 
     // Define the distribution based on the investment strategy
     const getDistribution = (strategy: any) => {
