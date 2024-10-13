@@ -33,7 +33,7 @@ const InterestPage = () => {
       const user = await getUser();
 
       const email = user ? user.email : "";
-      const response=await fetch('http://localhost:8080/interest_update',{
+      const response=await fetch('http://localhost:4000/interest_update',{
         method:'POST',
         headers:{'Content-Type':'application/json',},
         body:JSON.stringify({email:email,interests:items})
