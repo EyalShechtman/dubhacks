@@ -61,9 +61,16 @@ export default function RootLayout() {
         // Before the user has signed up, show the signup flow
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
-
           <Stack.Screen
             name="signup/step1"
+            options={{
+              headerTitle: '',
+              headerBackTitleVisible: false,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="signup/Interest"
             options={{
               headerTitle: '',
               headerBackTitleVisible: false,
