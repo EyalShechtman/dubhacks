@@ -58,7 +58,7 @@ export default function Invest() {
                     <Ionicons name="arrow-back" size={24} color="#333" />
                 </TouchableOpacity>
                 <Text style={styles.sectionTitle}>Your Investment Account</Text>
-                
+
                 <PieChart
                     data={chartData}
                     width={300}
@@ -79,11 +79,11 @@ export default function Invest() {
                     center={[10, 0]}
                     style={styles.pieChart}
                 />
-                
+
                 <View style={styles.investmentAmountContainer}>
                     <Text style={styles.investmentAmountText}>${investmentAmount}</Text>
                 </View>
-                
+
                 <View style={styles.detailsContainer}>
                     <Text style={styles.investmentDetail}>Investment Type: {investmentType || 'Not specified'}</Text>
                     <Text style={styles.investmentDetail}>Investment Strategy: {investmentStrategy || 'Not specified'}</Text>

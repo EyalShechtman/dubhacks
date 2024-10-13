@@ -3,6 +3,22 @@ const router = express.Router();
 const { User, Transaction } = require('../models/User');
 
 
+router.get('/get-intrests', async (req, res) => {
+
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    const existingUser = await User.findOne({ email: email });
+    if (!existingUser) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ interests: existingUser.interests });
+});
+
 router.post('/init-account', async (req, res) => {
     try {
         const { email } = req.body;
@@ -30,7 +46,7 @@ router.post('/init-account', async (req, res) => {
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
     try {
-        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests, goals} = req.body;
+        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests, goals } = req.body;
 
         // Create new user with email and password
         const newUser = new User({
@@ -38,7 +54,7 @@ router.post('/create', async (req, res) => {
             password,
             income,
             interests,
-            goals:[],
+            goals: [],
             wallet: 0,
             creditCard: {
                 number: creditCard.number,

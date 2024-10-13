@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@react-native-community/slider": "^4.5.3",
-    "dotenv": "^16.4.5",
-    "mongoose": "^8.7.1",
-    "openai": "^4.67.3"
-  }
-}
