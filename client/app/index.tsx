@@ -35,7 +35,7 @@ export default function Index() {
     <>
       <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
         <View style={styles.textContainer}>
-          <Text style={styles.welcomeText}>RomeRich</Text>
+          <Text style={styles.welcomeText}>RoamRich</Text>
         </View>
         <View style={styles.container}>
           <LoginButton setAccessToken={setAccessToken} />

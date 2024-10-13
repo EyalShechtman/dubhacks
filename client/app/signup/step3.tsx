@@ -17,7 +17,9 @@ export default function SignupStep3() {
             index: 0,
             routes: [{ name: 'Home/Home' }],
         });
+        
     };
+
 
     const navigateToStep = (step) => {
         navigation.navigate(`signup/${step}`);

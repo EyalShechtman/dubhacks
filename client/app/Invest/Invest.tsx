@@ -1,11 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
-import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Invest() {
-
     const navigation = useNavigation();
 
     return (
@@ -14,12 +12,10 @@ export default function Invest() {
             <View style={styles.goalsContainer}>
                 <Text style={styles.sectionTitle}>Your Investment Account</Text>
                 {/* Add content for goals here */}
-
-            </View>
+            </View>  {/* Closing tag fixed */}
         </LinearGradient>
     );
 }
-
 const styles = StyleSheet.create({
     gradient: {
         flex: 1,
