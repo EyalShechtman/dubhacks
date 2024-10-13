@@ -1,0 +1,109 @@
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+
+const InterestPage = () => {
+  const [input, setInput] = useState('');
+  const [items, setItems] = useState([]);
+
+  const addItem = () => {
+    if (input.trim()) {
+      setItems([...items, input]);
+      setInput('');
+    }
+  };
+
+  const removeItem = (index) => {
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Interest in Vacations</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Search..."
+        value={input}
+        onChangeText={(text) => setInput(text)}
+        onSubmitEditing={addItem}
+      />
+
+      <TouchableOpacity style={styles.addButton} onPress={addItem}>
+        <Text style={styles.addButtonText}>Add</Text>
+      </TouchableOpacity>
+
+      <View style={styles.itemContainer}>
+        {items.map((item, index) => (
+          <View key={index} style={styles.itemBox}>
+            <Text style={styles.itemText}>{item}</Text>
+            <TouchableOpacity onPress={() => removeItem(index)} style={styles.removeButton}>
+              <Text style={styles.removeButtonText}>X</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: '#F5F5F5',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+    backgroundColor: '#fff',
+  },
+  addButton: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  itemContainer: {
+    marginTop: 10,
+  },
+  itemBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#eee',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  itemText: {
+    fontSize: 16,
+  },
+  removeButton: {
+    backgroundColor: '#FF6347',
+    padding: 5,
+    borderRadius: 3,
+  },
+  removeButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+});
+
+export default InterestPage;
