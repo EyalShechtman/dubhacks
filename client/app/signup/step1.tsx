@@ -38,19 +38,21 @@ export default function SignupStep1() {
                     <Text style={styles.welcomeText}>How would you like to transfer funds?</Text>
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
-                    <View style={styles.buttonContent}>
-                        <Ionicons name="open-outline" size={24} color="#66B13E" />
-                        <Text style={styles.buttonText}>Link Bank Account</Text>
-                    </View>
-                </TouchableOpacity>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                        <View style={styles.buttonContent}>
+                            <Ionicons name="open-outline" size={24} color="#66B13E" />
+                            <Text style={styles.buttonText}>Link Bank Account</Text>
+                        </View>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
-                    <View style={styles.buttonContent}>
-                        <Ionicons name="open-outline" size={24} color="#66B13E" />
-                        <Text style={styles.buttonText}>Link Credit Card</Text>
-                    </View>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                        <View style={styles.buttonContent}>
+                            <Ionicons name="open-outline" size={24} color="#66B13E" />
+                            <Text style={styles.buttonText}>Link Credit Card</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </LinearGradient>
         </View>
     );
@@ -87,26 +89,31 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
     },
     textContainer: {
-        marginTop: 100,
-        alignSelf: 'center',
-        paddingHorizontal: 20,
+        position: 'absolute',
+        top: 100,
+        left: 20,
+        right: 20,
     },
     welcomeText: {
         color: '#FFFFFF',
         fontSize: 28,
         fontFamily: 'Roboto',
         fontWeight: 'bold',
-        textAlign: 'center',
+        textAlign: 'left',
     },
     gradient: {
         flex: 1,
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
+    },
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 100,
+        width: '100%',
         alignItems: 'center',
     },
     button: {
-        marginTop: 30,
+        marginTop: 20,
         backgroundColor: '#FFFFFF',
         paddingVertical: 15,
         paddingHorizontal: 20,
