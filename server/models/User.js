@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const User_Schema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
+    interests:{type: String},
     creditCard: {
         number: { type: String, required: true },
         expiryDate: { type: String, required: true },
