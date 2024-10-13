@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions } from "react-native";
 import { ProgressBar } from 'react-native-paper'; // Import ProgressBar from react-native-paper
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import LineChartComponent from "./LineChart"; // Import LineChartComponent from components folder
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function Home() {
@@ -33,7 +34,12 @@ export default function Home() {
                 <Ionicons name="settings" size={24} color="white" style={styles.settingsIcon} />
             </View>
 
-            {/* Time Filter Buttons */}
+            {/* Static Line Chart */}
+            <View style={styles.chartContainer}>
+                <LineChartComponent />
+            </View>
+
+            {/* Static Time Filter Buttons */}
             <View style={styles.timeFilters}>
                 <TouchableOpacity style={styles.filterButtonSelected}><Text style={styles.filterText}>1M</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.filterButton}><Text style={styles.filterText}>3M</Text></TouchableOpacity>
@@ -41,8 +47,9 @@ export default function Home() {
                 <TouchableOpacity style={styles.filterButton}><Text style={styles.filterText}>YTD</Text></TouchableOpacity>
             </View>
 
-            {/* Upcoming Goals */}
-            <ScrollView style={styles.scrollView}>
+            {/* Scrollable content */}
+            <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
+                {/* Upcoming Goals */}
                 <View style={styles.goalsContainer}>
                     <Text style={styles.sectionTitle}>Upcoming Goals</Text>
                     {goals.map((goal, index) => (
@@ -111,10 +118,13 @@ const styles = StyleSheet.create({
         top: 20,
         right: 20,
     },
+    chartContainer: {
+        paddingHorizontal: 10,
+    },
     timeFilters: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginVertical: 10,
+        marginVertical: 80,
     },
     filterButton: {
         paddingHorizontal: 10,
@@ -133,6 +143,12 @@ const styles = StyleSheet.create({
     filterText: {
         color: 'white',
         fontWeight: 'bold',
+    },
+    scrollView: {
+        flex: 1,
+    },
+    scrollViewContent: {
+        paddingBottom: 20,
     },
     goalsContainer: {
         padding: 20,
