@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Alert,
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useAuth0 } from 'react-native-auth0';
-import { use } from '../../../server/routes/account';
 
 const InterestPage = () => {
   const [input, setInput] = useState('');
@@ -11,6 +10,7 @@ const InterestPage = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const { authorize, user } = useAuth0();
+
   const addItem = () => {
     if (input.trim()) {
       setItems([...items, input]);
@@ -24,55 +24,47 @@ const InterestPage = () => {
   };
 
   const submitInterests = async () => {
-    if (items.length == 0) {
+    if (items.length === 0) {
       Alert.alert('No Interests added');
       return;
     }
     try {
       setLoading(true);
 
-      console.log(user);
-
       const email = user ? user.email : "";
-      console.log(email);
       const response = await fetch('http://localhost:4000/interest_update/interest_update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify({ email: email, interests: items })
       });
 
-      console.log(response);
-
       if (response.ok) {
-        navigation.navigate('step3');
+        navigation.navigate('signup/step2');
+      } else {
+        Alert.alert('Failed to update interests.');
       }
-      else {
-        Alert.alert('Failed to update interests.')
-      }
-    }
-    catch (error) {
-      console.error('Could not submit interests ', error);
+    } catch (error) {
+      console.error('Could not submit interests', error);
       Alert.alert('Could not submit interests');
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
-
-        <Text style={styles.title}>What do you do on your vacations?</Text>
-
+        <View style={styles.headerWrapper}>
+          <Text style={styles.title}>What do you do on your vacations?</Text>
+        </View>
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.input}
-            placeholder="enter your favorite activites..."
+            placeholder="enter your favorite activities..."
             value={input}
             onChangeText={(text) => setInput(text)}
-            onSubmitEditing={addItem} // Submit on Enter/Done
-            returnKeyType="done" // Makes keyboard display "Done" instead of "Next"
+            onSubmitEditing={addItem}
+            returnKeyType="done"
           />
         </View>
 
@@ -116,10 +108,14 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
+    color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
+  },
+  headerWrapper: {
+    marginTop: 50,
   },
   input: {
     borderWidth: 1,
@@ -140,32 +136,55 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start', // Ensures items appear left-to-right
     marginTop: 10,
+    paddingHorizontal: 10, // Adds padding on the sides
   },
   itemBox: {
-    flexDirection: 'row', // Align text and "X" horizontally
-    alignItems: 'center', // Center text and "X"
-    width: '28%', // Smaller width
-    padding: 8, // Reduced padding
-    backgroundColor: '#eee',
-    borderRadius: 5,
-    marginBottom: 10,
-    marginHorizontal: '1.5%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '48%', // Reduced width for even distribution
+    padding: 12, // Increased padding
+    backgroundColor: '#f0f0f0', // Light grey background
+    borderRadius: 10, // Rounded corners for a cleaner look
+    marginBottom: 15, // Space between items
+    marginHorizontal: '1%', // Slight horizontal spacing
+    borderWidth: 1, // Add subtle border
+    borderColor: '#ddd', // Border color
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3, // For Android shadow
   },
   itemText: {
-    fontSize: 14, // Smaller font size
-    marginRight: 5, // Add spacing between text and "X"
+    fontSize: 14,
+    flex: 1,
+    color: '#333', // Darker text for better visibility
   },
   removeButton: {
     backgroundColor: '#FF6347',
-    padding: 3, // Smaller padding for "X" button
-    borderRadius: 3,
+    padding: 6,
+    borderRadius: 5,
   },
   removeButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 12, // Smaller "X"
+    fontSize: 12,
+  },
+  submitButton: {
+    marginTop: 20,
+    backgroundColor: '#28A745',
+    paddingVertical: 15,
+    borderRadius: 25,
+    width: '80%',
+    alignSelf: 'center',
+  },
+  submitButtonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   button: {
     marginTop: 20,
@@ -174,6 +193,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 25,
     width: '80%',
+    alignSelf: 'center',
   },
   buttonContent: {
     flexDirection: 'row',

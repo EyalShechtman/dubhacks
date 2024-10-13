@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { useNavigation } from '@react-navigation/native';
 
+
 const LoginButton = ({ setAccessToken }) => {
   const { authorize, getCredentials } = useAuth0();
   const navigation = useNavigation();
@@ -14,6 +15,7 @@ const LoginButton = ({ setAccessToken }) => {
       const credentials = await getCredentials();
       if (credentials) {
         setAccessToken(credentials.accessToken);
+
         navigation.navigate("signup/step1"); // Navigate to signup page
       }
     } catch (e) {
@@ -35,7 +37,7 @@ export default function Index() {
     <>
       <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
         <View style={styles.textContainer}>
-          <Text style={styles.welcomeText}>RomeRich</Text>
+          <Text style={styles.welcomeText}>RoamRich</Text>
         </View>
         <View style={styles.container}>
           <LoginButton setAccessToken={setAccessToken} />

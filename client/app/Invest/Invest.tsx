@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { PieChart } from "react-native-chart-kit";
@@ -92,7 +92,6 @@ export default function Invest() {
         </LinearGradient>
     );
 }
-
 const styles = StyleSheet.create({
     gradient: {
         flex: 1,

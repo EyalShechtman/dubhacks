@@ -2,10 +2,35 @@ const express = require('express');
 const router = express.Router();
 const { User, Transaction } = require('../models/User');
 
+
+router.post('/init-account', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        // Check if the user with the provided email already exists
+        const existingUser = await User.findOne({ email: email });
+
+        if (existingUser) {
+            return res.status(400).json({ error: 'User with this email already exists' });
+        }
+
+        // If no user exists with the email, create a new user
+        let user = new User({ email });
+
+        await user.save();
+
+        res.status(201).json({ message: 'User account created successfully' });
+    } catch (err) {
+        console.error('Error creating user account:', err);
+        res.status(500).json({ error: 'Failed to create user account' });
+    }
+});
+
+
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
     try {
-        const { email, password, creditCard, budget, transactions, investmentPortfolio, income,interests } = req.body;
+        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests } = req.body;
 
         // Create new user with email and password
         const newUser = new User({
@@ -13,7 +38,7 @@ router.post('/create', async (req, res) => {
             password,
             income,
             interests,
-            wallet:0,
+            wallet: 0,
             creditCard: {
                 number: creditCard.number,
                 expiryDate: creditCard.expiryDate,

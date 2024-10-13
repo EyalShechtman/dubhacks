@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter, Alert } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import LinearGradient from 'react-native-linear-gradient';
+import { useAuth0 } from 'react-native-auth0';
+>>>>>>> 5d516d8014d0dcb7946437dd065b42d16305d673
 
 const { width } = Dimensions.get('window');
 
 export default function SignupStep3() {
     const navigation = useNavigation();
+<<<<<<< HEAD
     const [rectangleIndex1, setRectangleIndex1] = useState(0);
     const [rectangleIndex2, setRectangleIndex2] = useState(0);
 
@@ -37,6 +46,55 @@ export default function SignupStep3() {
     };
 
     const navigateToStep = (step: string) => {
+=======
+    const [rectangleIndex1, setRectangleIndex1] = useState(0); // For the first set
+    const [rectangleIndex2, setRectangleIndex2] = useState(0); // For the second set
+    const { authorize, user } = useAuth0();
+
+    const finishSignup = async () => {
+        try {
+            await submitInvestment();
+
+            DeviceEventEmitter.emit("event1");
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home/Home' }],
+            });
+        } catch (error) {
+            console.error('Could not finish signup,', error);
+            Alert.alert('Failed to submit investment details');
+        }
+
+    };
+
+    const submitInvestment = async () => {
+        const investmentTypes = ['roundup', 'budget remaining', 'both'];
+        const investmentComforts = ['conservative', 'moderate', 'aggressive'];
+        const investType = investmentTypes[rectangleIndex1];
+        const investComfort = investmentComforts[rectangleIndex2];
+        try {
+            console.log(user);
+
+            const email = user ? user.email : "";
+            console.log(email);
+            const response = await fetch('http://localhost:4000/investment/investment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', },
+                body: JSON.stringify({ email: email, investComfort: investComfort, investType: investType })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "failed to submit investment details");
+            }
+            console.log('Investment details: ', data);
+        } catch (error) {
+            console.error('Error submitting investment details', error);
+            Alert.alert('Error submitting ivnestment details');
+        }
+    }
+
+    const navigateToStep = (step) => {
+>>>>>>> 5d516d8014d0dcb7946437dd065b42d16305d673
         navigation.navigate(`signup/${step}`);
     };
 

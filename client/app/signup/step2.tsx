@@ -54,7 +54,7 @@ export default function SignupStep2() {
                 const user = await getUser();
 
                 const email = user ? user.email : "";
-                const response= await fetch('http://localhost:4000/perplexity_predict',{
+                const response= await fetch('http://localhost:4000/perplexity_predict/perplexity_predict',{
                     method:'POST',
                     headers:{'Content-Type':'application/json'},
                     body:JSON.stringify({email:email})

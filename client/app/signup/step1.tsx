@@ -1,15 +1,48 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
+import { useAuth0 } from 'react-native-auth0';
+import { use } from '../../../server/routes/account';
 
 export default function SignupStep1() {
     const navigation = useNavigation();
+    const [loading, setLoading] = useState(true);
+    const { authorize, user } = useAuth0();
 
     const navigateToStep = (step) => {
         navigation.navigate(`signup/${step}`);
     };
+
+    useEffect(() => {
+        initUser();
+    }, []);
+
+    const initUser = async () => {
+        try {
+            setLoading(true);
+
+            const email = user ? user.email : "";
+            const response = await fetch('http://localhost:4000/accounts/init-account', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', },
+                body: JSON.stringify({ email: email })
+            });
+
+            if (response.status === 400) {
+                console.log('Account already initialized');
+            } else if (!response.ok || response.status !== 400) {
+                Alert.alert('Failed to initialize account.');
+            }
+        }
+        catch (error) {
+            Alert.alert('Could not send request');
+        }
+        finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <View style={styles.container}>
