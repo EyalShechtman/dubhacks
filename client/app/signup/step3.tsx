@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function SignupStep1() {
+const { width } = Dimensions.get('window');
+
+export default function SignupStep3() {
     const navigation = useNavigation();
     const [rectangleIndex, setRectangleIndex] = useState(0);
 
@@ -16,15 +18,14 @@ export default function SignupStep1() {
         setRectangleIndex((prevIndex) => (prevIndex + 1) % 3);
     };
 
-    // Move to the previous rectangle
     const prevRectangle = () => {
-        setRectangleIndex((prevIndex) => (prevIndex - 1 + 3) % 3); // Wraps back to the last rectangle
+        setRectangleIndex((prevIndex) => (prevIndex - 1 + 3) % 3);
     };
 
     const rectangles = [
         {
             style: styles.rectangle1,
-            content: 'Both (Recomended)',
+            content: 'Both (Recommended)',
             subtext: 'A round-up investing account rounds up purchases to the nearest dollar and invests the spare change, helping you grow wealth passively.',
         },
         {
@@ -35,7 +36,7 @@ export default function SignupStep1() {
         {
             style: styles.rectangle3,
             content: 'Monthly left overs',
-            subtext: 'this is text for monthly overs',
+            subtext: 'This is text for monthly overs',
         },
     ];
 
@@ -44,12 +45,11 @@ export default function SignupStep1() {
             <LinearGradient colors={['#66B13E', '#FFFFFF']} style={styles.gradient}>
                 <Ionicons
                     name="arrow-back"
-                    size={20}
+                    size={24}
                     color="white"
                     onPress={() => navigation.goBack()}
                     style={styles.backArrow}
                 />
-                {/* Dots Container */}
                 <View style={styles.dotsContainer}>
                     <TouchableOpacity onPress={() => navigateToStep('step1')}>
                         <View style={styles.dotInactive} />
@@ -61,7 +61,6 @@ export default function SignupStep1() {
                         <View style={styles.dot} />
                     </TouchableOpacity>
                 </View>
-                {/* Text Container */}
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How would you like to invest?</Text>
                 </View>
@@ -95,7 +94,7 @@ export default function SignupStep1() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,  // Ensure the container takes up the full screen
+        flex: 1,
     },
     backArrow: {
         position: 'absolute',
@@ -104,92 +103,100 @@ const styles = StyleSheet.create({
     },
     dotsContainer: {
         position: 'absolute',
-        top: 100,   // Move the dots to the top
-        left: 60,  // Align the dots with the back arrow
+        top: 60,
+        alignSelf: 'center',
         flexDirection: 'row',
-        alignItems: 'center', // Align dots vertically in a row
+        alignItems: 'center',
     },
     dot: {
-        height: 15,
-        width: 15,
-        borderRadius: 10,
-        backgroundColor: 'white', // Active dot white
-        marginHorizontal: 5,
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        backgroundColor: 'white',
+        marginHorizontal: 4,
     },
     dotInactive: {
-        height: 15,
-        width: 15,
-        borderRadius: 10,
-        backgroundColor: 'black', // Inactive dots black
-        marginHorizontal: 5,
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        marginHorizontal: 4,
     },
     textContainer: {
-        marginTop: 150,
-        alignSelf: 'center',  // Center the text
+        marginTop: 100,
+        alignSelf: 'center',
+        paddingHorizontal: 20,
     },
     welcomeText: {
-        color: '#FFFFFF', // White text
-        fontSize: 32,     // Font size 32
-        fontFamily: 'Roboto', // Font style Roboto (Make sure Roboto is available or use Expo fonts)
+        color: '#FFFFFF',
+        fontSize: 28,
+        fontFamily: 'Roboto',
         fontWeight: 'bold',
         textAlign: 'center',
     },
     gradient: {
-        flex: 1,  // Ensure the gradient takes up the full screen
-        width: '100%',  // Take full width
-        height: '100%',  // Take full height
-        justifyContent: 'center',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingTop: 100,
+    },
+    carouselContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 30,
     },
     rectangle1: {
-        marginTop: 50,
-        width: 350,
+        width: width * 0.7,
         height: 150,
-        backgroundColor: '#66B13E', // Green for Rectangle 1
+        backgroundColor: '#66B13E',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
+        padding: 15,
     },
     rectangle2: {
-        marginTop: 50,
-        width: 200,
-        height: 100,
-        backgroundColor: '#FF5733', // Orange for Rectangle 2
+        width: width * 0.7,
+        height: 150,
+        backgroundColor: '#FF5733',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 30,
+        padding: 15,
     },
     rectangle3: {
-        marginTop: 50,
-        width: 200,
-        height: 100,
-        backgroundColor: '#3498DB', // Blue for Rectangle 3
+        width: width * 0.7,
+        height: 150,
+        backgroundColor: '#3498DB',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 30,
+        padding: 15,
     },
     rectangleText: {
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     rectangleSubtext: {
         color: 'white',
         fontSize: 14,
-        marginTop: 10,  // Add space between main text and subtext
+        marginTop: 10,
+        textAlign: 'center',
     },
     arrowLeft: {
-        position: 'absolute',
-        left: 20,
+        marginRight: 10,
     },
     arrowRight: {
-        position: 'absolute',
-        right: 20,
+        marginLeft: 10,
     },
     button: {
-        marginTop: 50,
-        backgroundColor: '#FFFFFF', 
-        paddingVertical: 15, 
+        marginTop: 40,
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 15,
         paddingHorizontal: 40,
         borderRadius: 25,
     },
