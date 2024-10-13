@@ -76,11 +76,22 @@ export default function SignupStep2() {
                     <Ionicons name="arrow-back" size={24} color="white" />
                 </TouchableOpacity>
                 
-                {/* ... (dots container remains the same) */}
+                <View style={styles.dotsContainer}>
+                    <TouchableOpacity onPress={() => navigateToStep('step1')}>
+                        <View style={styles.dotInactive} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigateToStep('step2')}>
+                        <View style={styles.dot} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigateToStep('step3')}>
+                        <View style={styles.dotInactive} />
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>How is your budget?</Text>
                 </View>
+                
                 <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
                     {budgetValues.map((item, index) => (
                         <View key={index} style={styles.budgetItem}>
