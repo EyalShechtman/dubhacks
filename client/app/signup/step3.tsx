@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, DeviceEventEmitter, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,17 +19,17 @@ export default function SignupStep3() {
         const investmentStrategy = rectangles2[rectangleIndex2].content;
 
         // Save the investment data to AsyncStorage
-        try {
-            await submitInvestment();
+        // try {
+        //     await submitInvestment();
 
-            await AsyncStorage.setItem('investmentData', JSON.stringify({
-                investmentType,
-                investmentStrategy
-            }));
-        } catch (error) {
-            console.error('Could not finish signup,', error);
-            Alert.alert('Failed to submit investment details');
-        }
+        //     await AsyncStorage.setItem('investmentData', JSON.stringify({
+        //         investmentType,
+        //         investmentStrategy
+        //     }));
+        // } catch (error) {
+        //     console.error('Could not finish signup,', error);
+        //     Alert.alert('Failed to submit investment details');
+        // }
 
         // Emit event (if needed)
         DeviceEventEmitter.emit("event1");
@@ -100,8 +100,12 @@ export default function SignupStep3() {
     ];
 
     const summaries = [
-        ['Summary for Set 1, Option 1', 'Summary for Set 1, Option 2', 'Summary for Set 1, Option 3'],
-        ['Summary for Set 2, Option 1', 'Summary for Set 2, Option 2', 'Summary for Set 2, Option 3'],
+        ['- Invests spare change from rounded-up transactions.', 
+            '- Invests leftover funds from underspending the monthly budget.', 
+            '- Combines round-ups and monthly surplus for investments.'],
+        ['- Prioritizes low-risk investments like bonds and secure ETFs.', 
+            '- Balances risk by investing in popular ETFs and established companies.', 
+            '- Targets high returns with stocks and cryptocurrencies, accepting higher risk.'],
     ];
 
     return (
@@ -159,7 +163,7 @@ export default function SignupStep3() {
 
                 {/* Summary */}
                 <View style={styles.summaryBox}>
-                    <Text style={styles.summaryTitle}>Summary</Text>
+                    <Text style={styles.summaryTitle}>Investing Methodology</Text>
                     <Text style={styles.summaryText}>{summaries[0][rectangleIndex1]}</Text>
                     <Text style={styles.summaryText}>{summaries[1][rectangleIndex2]}</Text>
                 </View>
@@ -301,19 +305,22 @@ const styles = StyleSheet.create({
     // },
     summaryBox: {
         marginTop: 30,
-        backgroundColor: '#E0E0E0',
+        backgroundColor: '#FEF7FF',
         padding: 20,
         borderRadius: 10,
         width: '80%',
+        alignItems: 'center',        // Centers the content horizontally
+        justifyContent: 'center',     // Centers the content vertically
     },
     summaryTitle: {
         fontWeight: 'bold',
         fontSize: 16,
         marginBottom: 10,
+        textAlign: 'center',          // Center-aligns the title text
     },
     summaryText: {
         fontSize: 14,
-        textAlign: 'center',
+        textAlign: 'center',          // Center-aligns the body text
     },
     arrowLeft: {
         marginRight: 10,
@@ -323,13 +330,13 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 40,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#C0DFB0',
         paddingVertical: 15,
         paddingHorizontal: 40,
         borderRadius: 25,
     },
     buttonText: {
-        color: '#66B13E',
+        color: '#000000',
         fontSize: 18,
         fontWeight: 'bold',
     },

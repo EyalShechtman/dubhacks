@@ -1,13 +1,64 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import LinearGradient from 'react-native-linear-gradient';
+import React, { useState, useRef,useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, PanResponder, Animated,Alert, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { ProgressBar } from 'react-native-paper';
-
+import { generateItin} from './Itinerary'
 export default function Goals() {
-
+    const [loading, setLoading] = useState(false);
+    const[updateing,setUpdating]=useState(false);
+    const { authorize, user } = useAuth0();
     const current = 1900;
     const navigation = useNavigation();
+    const genItin = async (goal) => {
+        try{
+            setLoading(true);
+
+            const email = user ? user.email : "";
+            if (!email) {
+                Alert.alert('Error', 'User not logged in');
+                return;
+            }
+            const response= await fetch('http://localhost:4000/account/get-intrests',{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({email:email})
+            });
+            const result= await response.json();
+            if(response.ok && result.interests){
+                try {
+                    setUpdating(true);
+                    // Prepare data for POST request
+        
+                    const email = user ? user.email : "";
+                    const inters=result.interests;
+        
+                    const response =await generateItin(goal,inters)
+        
+                    if (response.success) {
+                        Alert.alert('Generated Itinerary', response.completion);
+                    } else {
+                        Alert.alert('Error', 'Failed to generate itinerary');
+                    }
+                } catch (error) {
+                    console.error('Error generating itin:', error);
+                    Alert.alert('Error generating itin.');
+                } finally {
+                    setUpdating(false);
+                }
+            }else{
+                Alert.alert("Could not fetch interests ");
+                return;
+            }
+        }
+        catch(error){
+            console.error('Error fetching interests, ',error);
+        }
+        finally{
+            setLoading(false);
+        }
+    }
 
     const goals = [
         { title: 'Trip to Paris', target: 2000, current: current },
@@ -44,9 +95,10 @@ export default function Goals() {
                         {/* Generate Itinerary Button */}
                         <TouchableOpacity 
                             style={styles.itineraryButton}
-                            onPress={() => console.log(`Generating itinerary for ${goal.title}`)}
+                            onPress={genItin(goal.title)}
                         >
                             <Text style={styles.itineraryButtonText}>Generate Itinerary</Text>
+
                         </TouchableOpacity>
                     </View>
                 ))}

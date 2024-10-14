@@ -2,6 +2,27 @@ const express = require('express');
 const router = express.Router();
 const { User, Transaction } = require('../models/User');
 
+const goals = [
+    { destination: 'Japan', cost: 4500 },
+    { destination: 'France', cost: 3200 },
+    { destination: 'Brazil', cost: 1800 },
+];
+
+router.get('/get-intrests', async (req, res) => {
+
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    const existingUser = await User.findOne({ email: email });
+    if (!existingUser) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ interests: existingUser.interests });
+});
 
 router.post('/init-account', async (req, res) => {
     try {
@@ -15,7 +36,7 @@ router.post('/init-account', async (req, res) => {
         }
 
         // If no user exists with the email, create a new user
-        let user = new User({ email });
+        let user = new User({ email: email, recommendations: goals });
 
         await user.save();
 
@@ -30,7 +51,7 @@ router.post('/init-account', async (req, res) => {
 // POST route to create a user with credit card information, budget, transactions, and investment portfolio
 router.post('/create', async (req, res) => {
     try {
-        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests } = req.body;
+        const { email, password, creditCard, budget, transactions, investmentPortfolio, income, interests, goals } = req.body;
 
         // Create new user with email and password
         const newUser = new User({
@@ -38,6 +59,7 @@ router.post('/create', async (req, res) => {
             password,
             income,
             interests,
+            goals: [],
             wallet: 0,
             creditCard: {
                 number: creditCard.number,

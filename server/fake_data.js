@@ -24,11 +24,11 @@ async function fakedata() {
         await Transaction.deleteMany({});
 
         const users = [
-            { email: 'ethanle425@gmail.com', password: 'epicswag',interests:'going out, hiking, exploring, sightseeing',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:123000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
-            { email: 'lakshey23@gmail.com', password: 'Lakshey123!',interests:'seeing historical sights, mueseums, reading, being alone',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:93000 , investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
-            { email: 'tsamples445@gmail.com', password: 'omegalul@#',interests:'gaming,staying inside, anime,digital things',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:40000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
-            { email: 'eyalllllll1@gmail.com', password: 'peepopeepopeepo23',interests:'eating,meeting new people, cooking',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:50000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
-            { email: 'bigmanmoves23@gmail.com', password: 'bowowowow3',interests:'music,playing piano, going to concerts, festivals',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:60000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  }
+            { email: 'ethanle425@gmail.com', wallet:3000,goals:[{destination:"Spain",cost:1200}],password: 'epicswag',interests:'going out, hiking, exploring, sightseeing',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:123000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
+            { email: 'lakshey23@gmail.com', wallet:45000,goals:[{destination:"Italy",cost:2200}],password: 'Lakshey123!',interests:'seeing historical sights, mueseums, reading, being alone',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:93000 , investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'} },
+            { email: 'tsamples445@gmail.com', wallet:99999,goals:[{destination:"Japan",cost:2400},{destination:"Greece",cost:800}],password: 'omegalul@#',interests:'gaming,staying inside, anime,digital things',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:40000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
+            { email: 'eyalllllll1@gmail.com', wallet:30,goals:[{destination:"Idaho",cost:200}],password: 'peepopeepopeepo23',interests:'eating,meeting new people, cooking',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:50000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  },
+            { email: 'bigmanmoves23@gmail.com', wallet:300,goals:[{destination:"Oregon",cost:800}],password: 'bowowowow3',interests:'music,playing piano, going to concerts, festivals',creditCard:{number:'12345',expiryDate:'123',cvv:'123'},income:60000, investmentPortfolio:{investmentComfort:'conservative',investmentType:'roundup'}  }
         ];
 
         const user_list = [];

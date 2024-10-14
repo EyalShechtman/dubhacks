@@ -45,13 +45,12 @@ export default function SignupStep2() {
     ]);
     const[loading,setLoading]=useState(true);
     const[updateing,setUpdating]=useState(false);
-    const { authorize, getCredentials, getUser } = useAuth0();
+    const { authorize, user } = useAuth0();
     const buttonScale = useRef(new Animated.Value(1)).current;
     useEffect(()=>{
         async function getPredictedBudget(){
             try{
                 setLoading(true);
-                const user = await getUser();
 
                 const email = user ? user.email : "";
                 const response= await fetch('http://localhost:4000/perplexity_predict/perplexity_predict',{
@@ -102,7 +101,6 @@ export default function SignupStep2() {
         try {
             setUpdating(true);
             // Prepare data for POST request
-            const user = await getUser();
 
             const email = user ? user.email : "";
             const budget = {
@@ -112,14 +110,14 @@ export default function SignupStep2() {
                 other: { max: budgetValues[3].amount }
             };
 
-            const response = await fetch('http://localhost:4000/perplexity_predict', {
+            const response = await fetch('http://localhost:4000/perplexity_predict/perplexity_predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: email, budget:budget }) 
             });
 
             if (response.ok) {
-                navigation.navigate('step3');
+                navigation.navigate('signup/step3');
             } else {
                 Alert.alert('Failed to update budget.');
             }
@@ -135,7 +133,7 @@ export default function SignupStep2() {
         return (
             <View style={[styles.container, styles.loadingContainer]}>
                 <ActivityIndicator size="large" color="#66B13E" />
-                <Text style={styles.loadingText}>Loading your budget...</Text>
+                <Text style={styles.loadingText}>Predicting your budget...</Text>
             </View>
         );
     }
@@ -163,7 +161,7 @@ export default function SignupStep2() {
                 </View>
 
                 <View style={styles.textContainer}>
-                    <Text style={styles.welcomeText}>How is your budget?</Text>
+                    <Text style={styles.welcomeText}>What is your budget?</Text>
                 </View>
                 
                 <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
@@ -357,5 +355,14 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 1},
         shadowOpacity: 0.2,
         shadowRadius: 1,
+    },
+    loadingContainer: {
+        padding: 20,                // Adds some padding around the content
+    },
+    loadingText: {
+        fontSize: 16,               // Text size for the loading message
+        color: '#333',              // Text color for better contrast
+        marginTop: 10,              // Adds space between the spinner and text
+        textAlign: 'center',        // Centers the text
     },
 });

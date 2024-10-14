@@ -72,7 +72,7 @@ export default function SignupStep1() {
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigateToStep('step2')}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signup/Interest')}>
                         <View style={styles.buttonContent}>
                             <Ionicons name="open-outline" size={24} color="#66B13E" />
                             <Text style={styles.buttonText}>Link Bank Account</Text>

@@ -2,6 +2,22 @@ const express = require('express');
 const { User } = require('../models/User');
 const router = express.Router();
 
+router.get('/get-investment', async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    const existingUser = await User.findOne({ email: email });
+
+    if (!existingUser) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ investmentPortfolio: existingUser.investmentPortfolio });
+});
+
 router.post('/investment', async (req, res) => {
     try {
         const { email, investmentComfort, investmentType } = req.body;
